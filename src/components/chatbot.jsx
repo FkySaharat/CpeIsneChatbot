@@ -1,6 +1,15 @@
-import React, { Component } from 'react';
+
+import React, { useState, useRef, useEffect, useCallback,Component } from "react";
 import Listmessages from './messages';
 import Api from '../api.json';
+//import { storiesOf } from "@storybook/react";
+import ScrollToBottom from 'react-scroll-to-bottom';
+import { Search } from "grommet-icons";
+import { Box, Image, Grommet, Text, TextInput, Button ,Grid,InfiniteScroll} from "grommet";
+import { grommet } from "grommet/themes";
+import { deepMerge } from "grommet/utils";
+
+import { css } from 'glamor';
 
 class Chatbot extends Component {
     state={
@@ -14,6 +23,8 @@ class Chatbot extends Component {
         this.handleaddmessage=this.handleaddmessage.bind(this);  
         this.handlemessage=this.handlemessage.bind(this);     
     }
+
+    
 
     handleaddmessage(event){
      this.state.messagebuffer.push(event[0]);
@@ -50,21 +61,36 @@ class Chatbot extends Component {
             console.log(data.result.fulfillment.messages[0].speech);
         }).catch((error) => console.log(error))
     }
+  
     
+    
+
     render() {
+      const ROOT_CSS = css({
+        height: 600,
+        width: 400
+      });
       
       return (
-        <div> 
+        <Grommet full={true}  > 
+        <Box align="center"  background="dark-1"  height="full">
+            <Box align="center" height="80%" width="60%" overflow="auto" >
+              <ScrollToBottom className={ ROOT_CSS }>
+              {this.state.messagebuffer.map(m=><Listmessages value={m} />)}
+              </ScrollToBottom>
+            </Box>
               
-           {this.state.messagebuffer.map(m=><Listmessages  value={m} />)}
+            <Box width="40%" align="center">
+              <TextInput  type="text" ref="messages" />
+              <Button pad="small" primary label="Send Message" onClick={()=>this.handlemessage(this.refs.messages.value)} />  
+            </Box> 
+              
+           
+        </Box>
             
-            <div>
-              <input type="text" ref="messages" />
-              <input type="submit" value="send" onClick={()=>this.handlemessage(this.refs.messages.value)} />
-            </div>
+            
          
-         
-        </div>
+        </Grommet>
       );
     }
  
