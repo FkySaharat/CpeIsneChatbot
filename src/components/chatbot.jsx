@@ -1,20 +1,20 @@
 
-import React, { useState, useRef, useEffect, useCallback,Component } from "react";
+import React, {Component } from "react";
 import Listmessages from './messages';
 import Api from '../api.json';
 //import { storiesOf } from "@storybook/react";
 import ScrollToBottom from 'react-scroll-to-bottom';
-import { Search } from "grommet-icons";
+//import { Search } from "grommet-icons";
 import { Box, Image, Grommet, Text, TextInput, Button ,Grid,InfiniteScroll} from "grommet";
-import { grommet } from "grommet/themes";
-import { deepMerge } from "grommet/utils";
-
+//import { grommet } from "grommet/themes";
+//import { deepMerge } from "grommet/utils";
 import { css } from 'glamor';
+import { Close, Send, User } from "grommet-icons";
 
 class Chatbot extends Component {
     state={
       count:0,
-      messagebuffer:[{mode:null,time:null,type:null}],
+      messagebuffer:[{mode:null,time:null,type:null,payload:null}],
     };
 
     constructor() {
@@ -47,6 +47,7 @@ class Chatbot extends Component {
         }).then((data)=>{
             attr=[{mode:'bot',time:0,type:'message',payload:data.result.fulfillment.speech}];
             this.handleaddmessage(attr);
+            console.log(attr);
             var m =data.result.fulfillment.messages;
             for(var i=0;i<m.length;i++){
               if(m[i].imageUrl){
@@ -68,21 +69,21 @@ class Chatbot extends Component {
     render() {
       const ROOT_CSS = css({
         height: 600,
-        width: 400
+        width:  360
       });
       
       return (
         <Grommet full={true}  > 
         <Box align="center"  background="dark-1"  height="full">
-            <Box align="center" height="80%" width="60%" overflow="auto" >
-              <ScrollToBottom className={ ROOT_CSS }>
+            <Box align="center" background="linear-gradient(102.77deg, #865ED6 -9.18%, #18BAB9 209.09%)" height="80%" width="medium" overflow="auto" round={{ "corner": "bottom"}}>
+              <ScrollToBottom className={ROOT_CSS}>
               {this.state.messagebuffer.map(m=><Listmessages value={m} />)}
               </ScrollToBottom>
             </Box>
               
-            <Box width="40%" align="center">
+            <Box margin={{"top":"xsmall"}} width="medium" align="center" direction="row" justify="between">
               <TextInput  type="text" ref="messages" />
-              <Button pad="small" primary label="Send Message" onClick={()=>this.handlemessage(this.refs.messages.value)} />  
+              <Button icon={<Send />} margin="xsmall" pad="small" primary  onClick={()=>this.handlemessage(this.refs.messages.value)} />  
             </Box> 
               
            
