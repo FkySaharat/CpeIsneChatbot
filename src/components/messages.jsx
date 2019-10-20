@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { Box, Image, Grommet, Text, TextInput, Button ,Grid,InfiniteScroll} from "grommet";
+import { Box, Image, Text,Button ,Grid} from "grommet";
 
 function Renderimage(params) { 
-        return(<img src={params} style={{ height:150}}/>);    
+        return(<Image src={params} style={{ height:150}}/>); 
+         
 }
 
 function Rendermessage(params) {
-    return(<Box background="accent-1" round="xsmall" pad="xxsmall"><Text>{params}</Text></Box>);    
+    return(<Text>{params}</Text>);    
 }
 
 class Messagemode extends Component {
@@ -15,6 +16,7 @@ class Messagemode extends Component {
     }
     
     render() { 
+        console.log(this);
        
 
         var image =true;
@@ -23,14 +25,14 @@ class Messagemode extends Component {
         }
         if(this.props.value.mode==='client'){
             return(
-            <Box align="end">
+            <Box align="end" >
                 <Text size="xsmall" >{this.props.value.mode}</Text>
                 {image ? Renderimage(this.props.value.payload):Rendermessage(this.props.value.payload)}
             </Box>);
         }
         else{
             return(
-            <Box align="start">
+            <Box  align="start" >
                 <Text size="xsmall">{this.props.value.mode}</Text>
                 {image ? Renderimage(this.props.value.payload):Rendermessage(this.props.value.payload)}
             </Box>);
@@ -49,7 +51,9 @@ class ListMessages extends Component {
         
         
         return(
-            <Messagemode value={content}/>
+           
+            <div><Messagemode value={content} /></div>
+          
         ); 
       
         
