@@ -108,7 +108,7 @@ class Chatbot extends Component {
     
       
       
-      console.log("lenght",this.state.messagebuffer[this.state.messagebuffer.length-1]);
+      
       return (
         <Grommet full={true}  > 
         <Box align="center"  background={{"color":"#ffffff" , "image":"url(https://firebasestorage.googleapis.com/v0/b/cpe-isne-chatbot-psheil.appspot.com/o/bg.png?alt=media&token=4ca292e8-028d-4bae-a6ba-b2d7fb3aadd6)"}} height="full"    >
