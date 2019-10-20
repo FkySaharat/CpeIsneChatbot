@@ -92,7 +92,8 @@ class Chatbot extends Component {
     //Enter to send messages
     handleKeyPress = (event) => {
       if(event.key === 'Enter'){
-        this.handlemessage(this.refs.messages.value)
+        this.handlemessage(this.refs.messages.value);
+        this.refs.messages.value=' ';
       }
     }
     
@@ -118,7 +119,7 @@ class Chatbot extends Component {
             </Box>
             
             <Box margin={{"top":"xsmall"}} width="medium" align="center" direction="row" justify="between">
-              <TextInput  type="text" placeholder="Type here" ref="messages" onKeyPress={this.handleKeyPress}/>
+              <TextInput  type="text"  placeholder="Type here" ref="messages" onKeyPress={this.handleKeyPress}/>
               <Button icon={<Send />} margin="xsmall" pad="small" primary className="test1" to="test1" onClick={()=>this.handlemessage(this.refs.messages.value)} />  
             </Box>           
             
