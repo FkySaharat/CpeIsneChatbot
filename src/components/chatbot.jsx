@@ -4,12 +4,14 @@ import Listmessages from './messages';
 import Api from '../api.json';
 //import { storiesOf } from "@storybook/react";
 //import { Search } from "grommet-icons";
-import { Box, Grommet, TextInput, Button } from "grommet";
+import { Box, Grommet, TextInput, Button,Image } from "grommet";
 //import { grommet } from "grommet/themes";
 //import { deepMerge } from "grommet/utils";
 import { Send } from "grommet-icons";
 import * as Scroll from 'react-scroll';
 import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+import Navbar from "./Navbar";
+import bg from "../bg.png";
 
 
 class Chatbot extends Component {
@@ -33,7 +35,10 @@ class Chatbot extends Component {
     }
 
     //communicate to chatbot
-    handlemessage(para){
+    handlemessage(para){   
+      if(para!==" "){
+
+      
       var attr=[{mode:'client',time:0,type:'message',payload:para}];
       this.handleaddmessage(attr);
     
@@ -49,7 +54,7 @@ class Chatbot extends Component {
         }).then((data)=>{
             attr=[{mode:'bot',time:0,type:'message',payload:data.result.fulfillment.speech}];
             this.handleaddmessage(attr);
-            console.log(attr);
+           
             var m =data.result.fulfillment.messages;
             for(var i=0;i<m.length;i++){
               if(m[i].imageUrl){
@@ -58,8 +63,9 @@ class Chatbot extends Component {
               }
             }
             this.scrollToWithContainer()
-            console.log(data.result.fulfillment.messages[0].speech);
+            
         }).catch((error) => console.log(error))
+      }
     }
   
     //ScrollTothelastmessage
@@ -104,8 +110,16 @@ class Chatbot extends Component {
       console.log("lenght",this.state.messagebuffer[this.state.messagebuffer.length-1]);
       return (
         <Grommet full={true}  > 
-        <Box align="center"  background="dark-1" height="full" >
-            <Box  background="linear-gradient(102.77deg, #865ED6 -9.18%, #18BAB9 209.09%)"  overflow={{"vertical": "scroll", "horizontal": "hidden"}} height="80%" width="medium"   round={{ "corner": "bottom"}} id="scroll-container">
+        <Box align="center"  background={{"color":"#ffffff" , "image":"url(https://firebasestorage.googleapis.com/v0/b/cpe-isne-chatbot-psheil.appspot.com/o/bg.png?alt=media&token=4ca292e8-028d-4bae-a6ba-b2d7fb3aadd6)"}} height="full"    >
+
+            <Navbar />
+            
+            
+            <Box  background="linear-gradient(102.77deg, #EEF5DB -9.18%, #f8f8f8 209.09%)"  
+                overflow={{"vertical": "scroll", "horizontal": "hidden"}} 
+                height="80%" width="medium"   
+                elevation="medium"
+                id="scroll-container">
               
             {this.state.messagebuffer.map(m=>{
                 if(m!==this.state.messagebuffer[this.state.messagebuffer.length-1]){
@@ -120,7 +134,7 @@ class Chatbot extends Component {
             
             <Box margin={{"top":"xsmall"}} width="medium" align="center" direction="row" justify="between">
               <TextInput  type="text"  placeholder="Type here" ref="messages" onKeyPress={this.handleKeyPress}/>
-              <Button icon={<Send />} margin="xsmall" pad="small" primary className="test1" to="test1" onClick={()=>this.handlemessage(this.refs.messages.value)} />  
+              <Button icon={<Send />} margin="xsmall" pad="small" primary color="linear-gradient(102.77deg, #F1A66A -9.18%, #F7EE7F 209.09%)"  className="test1" to="test1" onClick={()=>this.handlemessage(this.refs.messages.value)} />  
             </Box>           
             
         </Box>
