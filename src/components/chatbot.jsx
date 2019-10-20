@@ -120,6 +120,7 @@ class Chatbot extends Component {
                 overflow={{"vertical": "scroll", "horizontal": "hidden"}} 
                 height="80%" width="medium"   
                 elevation="medium"
+                pad={{"bottom":"small"}}
                 id="scroll-container">
               
             {this.state.messagebuffer.map(m=>{

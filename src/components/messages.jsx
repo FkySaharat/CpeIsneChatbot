@@ -3,10 +3,10 @@ import { Box, Image, Text,Button ,Grid} from "grommet";
 
 function Renderimage(params) { 
     if(params.mode==="client"){
-        return(<Box margin={{right:"small"}}><Image src={params.payload} style={{ height:150}}/></Box>); 
+        return(<Box margin={{right:"small"}}  animation={{"type":"slideLeft" , "duration": 1000, "delay":100}}><Image src={params.payload} style={{ height:150}}/></Box>); 
     }
     else{
-        return(<Box margin={{left:"xsmall"}}><Image src={params.payload} style={{ height:150}}/></Box>); 
+        return(<Box margin={{left:"xsmall"}}  animation={{"type":"slideRight" , "duration": 1000, "delay":100}}><Image src={params.payload} style={{ height:150}}/></Box>); 
     }
          
 }
@@ -14,10 +14,11 @@ function Renderimage(params) {
 function Rendermessage(params) {
    
     if(params.mode==="client") {
-        return(<Box pad="xsmall" width={{max:"300px"}} align="stretch" animation={{"type":"slideLeft" , "duration": 1000, "delay":100}} margin={{right:"small"}} background="linear-gradient(102.77deg, #F36F66 -9.18%, #F7EE7F 209.09%)"><Text>{params.payload}</Text></Box>);
+        return(<Box pad="xsmall" width={{max:"300px"}} align="stretch" animation={{"type":"slideLeft" , "duration": 1000, "delay":10}} margin={{right:"small"}} background="linear-gradient(102.77deg, #F36F66 -9.18%, #F7EE7F 209.09%)"><Text>{params.payload}</Text></Box>);
     }
     else{
-        return(<Box pad="xsmall" margin={{left:"xsmall"}} background="linear-gradient(102.77deg, #F36F66 -9.18%, #F7EE7F 209.09%)"><Text>{params.payload}</Text></Box>);    
+        return(<Box pad="xsmall" margin={{left:"xsmall"}}  animation={{"type":"slideRight" , "duration": 1000, "delay":100}}
+        background="linear-gradient(102.77deg, #F36F66 -9.18%, #F7EE7F 209.09%)"><Text>{params.payload}</Text></Box>);    
 
     }
 }
