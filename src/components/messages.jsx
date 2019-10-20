@@ -14,11 +14,11 @@ function Renderimage(params) {
 function Rendermessage(params) {
    
     if(params.mode==="client") {
-        return(<Box pad="xsmall" width={{max:"300px"}} align="stretch" animation={{"type":"slideLeft" , "duration": 1000, "delay":10}} margin={{right:"small"}} background="linear-gradient(102.77deg, #F36F66 -9.18%, #F7EE7F 209.09%)"><Text>{params.payload}</Text></Box>);
+        return(<Box pad="xsmall" width={{max:"300px"}} align="stretch" animation={{"type":"slideLeft" , "duration": 1000, "delay":100}} margin={{right:"small"}} background="linear-gradient(102.77deg, #F36F66 -9.18%, #F7EE7F 209.09%)"><Text>{params.payload}</Text></Box>);
     }
     else{
         return(<Box pad="xsmall" margin={{left:"xsmall"}}  animation={{"type":"slideRight" , "duration": 1000, "delay":100}}
-        background="linear-gradient(102.77deg, #F36F66 -9.18%, #F7EE7F 209.09%)"><Text>{params.payload}</Text></Box>);    
+        background="linear-gradient(102.77deg, #C7C7A6 -9.18%, #FAF9F9 209.09%)"><Text>{params.payload}</Text></Box>);    
 
     }
 }
@@ -37,14 +37,14 @@ class Messagemode extends Component {
         if(this.props.value.mode==='client'){
             return(
             <Box align="end"  >
-                <Text size="xsmall" >Me</Text>
+                <Text margin={{"right":"small"}} size="xsmall" >Me</Text>
                 {image ? Renderimage(this.props.value):Rendermessage(this.props.value)}
             </Box>);
         }
         else{
             return(
-            <Box  align="start" >
-                <Text size="xsmall">CPE ISNE Bot</Text>
+            <Box  align="start" margin={{"left":"small"}}> 
+                <Text  size="xsmall">CPE ISNE Bot</Text>
                 {image ? Renderimage(this.props.value):Rendermessage(this.props.value)}
             </Box>);
         }
