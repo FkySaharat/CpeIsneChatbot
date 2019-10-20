@@ -41,7 +41,7 @@ class Chatbot extends Component {
       
       var attr=[{mode:'client',time:0,type:'message',payload:para}];
       this.handleaddmessage(attr);
-    
+      this.scrollToWithContainer()
       fetch(Api.Url+para+'&sessionId=2',{
             method:'GET',
             headers: new Headers({
@@ -52,9 +52,10 @@ class Chatbot extends Component {
         .then((res) => {
             return res.json(); 
         }).then((data)=>{
-            attr=[{mode:'bot',time:0,type:'message',payload:data.result.fulfillment.speech}];
+
+            attr=[{mode:'bot',time:0,type:'message',payload:data.result.fulfillment.messages[0].speech}];
             this.handleaddmessage(attr);
-           
+            
             var m =data.result.fulfillment.messages;
             for(var i=0;i<m.length;i++){
               if(m[i].imageUrl){
@@ -107,7 +108,7 @@ class Chatbot extends Component {
     
       
       
-      console.log("lenght",this.state.messagebuffer[this.state.messagebuffer.length-1]);
+      
       return (
         <Grommet full={true}  > 
         <Box align="center"  background={{"color":"#ffffff" , "image":"url(https://firebasestorage.googleapis.com/v0/b/cpe-isne-chatbot-psheil.appspot.com/o/bg.png?alt=media&token=4ca292e8-028d-4bae-a6ba-b2d7fb3aadd6)"}} height="full"    >
