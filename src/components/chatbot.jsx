@@ -52,11 +52,15 @@ class Chatbot extends Component {
         .then((res) => {
             return res.json(); 
         }).then((data)=>{
-
-            attr=[{mode:'bot',time:0,type:'message',payload:data.result.fulfillment.messages[0].speech}];
-            this.handleaddmessage(attr);
+          var m =data.result.fulfillment.messages;
+          for(var i=0;i<m.length;i++){
+            if(m[i].speech){
+              attr=[{mode:'bot',time:0,type:'message',payload:m[i].speech}];
+              this.handleaddmessage(attr);
+            }
+          }
             
-            var m =data.result.fulfillment.messages;
+            
             for(var i=0;i<m.length;i++){
               if(m[i].imageUrl){
                 attr=[{mode:'bot',time:0,type:'image',payload:m[i].imageUrl}];
