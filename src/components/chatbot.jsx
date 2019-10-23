@@ -6,7 +6,8 @@ import Api from '../api.json';
 
 import * as Scroll from 'react-scroll';
 import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
-
+import Container from '@material-ui/core/Container';
+import { makeStyles } from '@material-ui/core/styles';
 
 
 
@@ -105,7 +106,7 @@ class Chatbot extends Component {
       
       return (
         <div> 
-        <div>
+        <Container>
             <Navbar />
             <div>
               
@@ -124,7 +125,7 @@ class Chatbot extends Component {
               <button   className="test1" to="test1" onClick={()=>this.handlemessage(this.refs.messages.value)} />  
             </div>  
                        
-        </div>
+        </Container>
         </div>
       );
     }
