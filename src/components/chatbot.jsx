@@ -1,17 +1,13 @@
 
 import React, {Component } from "react";
 import Listmessages from './messages';
+import Navbar from "./Navbar";
 import Api from '../api.json';
-//import { storiesOf } from "@storybook/react";
-//import { Search } from "grommet-icons";
-import { Box, Grommet, TextInput, Button,Image } from "grommet";
-//import { grommet } from "grommet/themes";
-//import { deepMerge } from "grommet/utils";
-import { Send } from "grommet-icons";
+
 import * as Scroll from 'react-scroll';
 import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
-import Navbar from "./Navbar";
-import bg from "../bg.png";
+
+
 
 
 class Chatbot extends Component {
@@ -35,40 +31,35 @@ class Chatbot extends Component {
     }
 
     //communicate to chatbot
-    handlemessage(para){   
+    handlemessage(para){ 
+      this.refs.messages.value=' ';  
       if(para!==" "){
-
-      
-      var attr=[{mode:'client',time:0,type:'message',payload:para}];
-      this.handleaddmessage(attr);
-      this.scrollToWithContainer()
-      fetch(Api.Url+para+'&sessionId=2',{
-            method:'GET',
-            headers: new Headers({
-                    'Content-Type': 'application/json',
-                    'Authorization': Api.Authorization
-            })  
-        })
-        .then((res) => {
-            return res.json(); 
+        var attr=[{mode:'client',time:0,type:'message',payload:para}];
+        this.handleaddmessage(attr);
+        this.scrollToWithContainer()
+        fetch(Api.Url+para+'&sessionId=2',{
+              method:'GET',
+              headers: new Headers({
+                      'Content-Type': 'application/json',
+                      'Authorization': Api.Authorization
+              })  
+        }).then((res) => {
+              return res.json(); 
         }).then((data)=>{
-          var m =data.result.fulfillment.messages;
-          for(var i=0;i<m.length;i++){
-            if(m[i].speech){
-              attr=[{mode:'bot',time:0,type:'message',payload:m[i].speech}];
-              this.handleaddmessage(attr);
+            var m =data.result.fulfillment.messages;
+            for(var i=0;i<m.length;i++){
+              if(m[i].speech){
+                attr=[{mode:'bot',time:0,type:'message',payload:m[i].speech}];
+                this.handleaddmessage(attr);
+              }
             }
-          }
-            
-            
             for(var i=0;i<m.length;i++){
               if(m[i].imageUrl){
                 attr=[{mode:'bot',time:0,type:'image',payload:m[i].imageUrl}];
                 this.handleaddmessage(attr);
               }
             }
-            this.scrollToWithContainer()
-            
+              this.scrollToWithContainer()            
         }).catch((error) => console.log(error))
       }
     }
@@ -104,7 +95,6 @@ class Chatbot extends Component {
     handleKeyPress = (event) => {
       if(event.key === 'Enter'){
         this.handlemessage(this.refs.messages.value);
-        this.refs.messages.value=' ';
       }
     }
     
@@ -114,38 +104,28 @@ class Chatbot extends Component {
       
       
       return (
-        <Grommet full={true}  > 
-        <Box align="center"  background={{"color":"#ffffff" , "image":"url(https://firebasestorage.googleapis.com/v0/b/cpe-isne-chatbot-psheil.appspot.com/o/bg.png?alt=media&token=4ca292e8-028d-4bae-a6ba-b2d7fb3aadd6)"}} height="full"    >
-
+        <div> 
+        <div>
             <Navbar />
-            
-            
-            <Box  background="linear-gradient(102.77deg, #EEF5DB -9.18%, #f8f8f8 209.09%)"  
-                overflow={{"vertical": "scroll", "horizontal": "hidden"}} 
-                height="80%" width="medium"   
-                elevation="medium"
-                pad={{"bottom":"small"}}
-                id="scroll-container">
+            <div>
               
-            {this.state.messagebuffer.map(m=>{
-                if(m!==this.state.messagebuffer[this.state.messagebuffer.length-1]){
-                  return <Listmessages value={m} name="test1"  />
-                }
-                else{
-                  return <Listmessages value={m} />
-                }
-            })}
+                {this.state.messagebuffer.map(m=>{
+                    if(m!==this.state.messagebuffer[this.state.messagebuffer.length-1]){
+                      return <Listmessages value={m} name="test1"  />
+                    }
+                    else{
+                      return <Listmessages value={m} />
+                    }
+                })}
+            </div>
             
-            </Box>
-            
-            <Box margin={{"top":"xsmall"}} width="medium" align="center" direction="row" justify="between">
-              <TextInput  type="text"  placeholder="Type here" ref="messages" onKeyPress={this.handleKeyPress}/>
-              <Button icon={<Send />} margin="xsmall" pad="small" primary color="linear-gradient(102.77deg, #F1A66A -9.18%, #F7EE7F 209.09%)"  className="test1" to="test1" onClick={()=>this.handlemessage(this.refs.messages.value)} />  
-            </Box>           
-            
-        </Box>
-       
-        </Grommet>
+            <div>
+              <input  type="text"  placeholder="Type here" ref="messages" onKeyPress={this.handleKeyPress}/>
+              <button   className="test1" to="test1" onClick={()=>this.handlemessage(this.refs.messages.value)} />  
+            </div>  
+                       
+        </div>
+        </div>
       );
     }
  
