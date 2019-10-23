@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Box, Image, Text,Button ,Grid} from "grommet";
+
 
 function Renderimage(params) { 
     if(params.mode==="client"){
-        return(<Box margin={{right:"small"}}  animation={{"type":"slideLeft" , "duration": 1000, "delay":100}}><Image src={params.payload} style={{ height:150}}/></Box>); 
+        return(<div   ><img src={params.payload} style={{ height:150}}/></div>); 
     }
     else{
-        return(<Box margin={{left:"xsmall"}}  animation={{"type":"slideRight" , "duration": 1000, "delay":100}}><Image src={params.payload} style={{ height:150}}/></Box>); 
+        return(<div ><img src={params.payload} style={{ height:150}}/></div>); 
     }
          
 }
@@ -14,11 +14,10 @@ function Renderimage(params) {
 function Rendermessage(params) {
    
     if(params.mode==="client") {
-        return(<Box pad="xsmall" width={{max:"300px"}} align="stretch" animation={{"type":"slideLeft" , "duration": 1000, "delay":100}} margin={{right:"small"}} background="linear-gradient(102.77deg, #F36F66 -9.18%, #F7EE7F 209.09%)"><Text>{params.payload}</Text></Box>);
+        return(<div>{params.payload}</div>);
     }
     else{
-        return(<Box pad="xsmall" margin={{left:"xsmall"}}  animation={{"type":"slideRight" , "duration": 1000, "delay":100}}
-        background="linear-gradient(102.77deg, #C7C7A6 -9.18%, #FAF9F9 209.09%)"><Text>{params.payload}</Text></Box>);    
+        return(<div>{params.payload}</div>);    
 
     }
 }
@@ -36,17 +35,17 @@ class Messagemode extends Component {
         }
         if(this.props.value.mode==='client'){
             return(
-            <Box align="end"  >
-                <Text margin={{"right":"small"}} size="xsmall" >Me</Text>
+            <div>
+                <p>Me</p>
                 {image ? Renderimage(this.props.value):Rendermessage(this.props.value)}
-            </Box>);
+            </div>);
         }
         else{
             return(
-            <Box  align="start" margin={{"left":"small"}}> 
-                <Text  size="xsmall">CPE ISNE Bot</Text>
+            <div> 
+                <p>cpebot</p>
                 {image ? Renderimage(this.props.value):Rendermessage(this.props.value)}
-            </Box>);
+            </div>);
         }
     }
 }
