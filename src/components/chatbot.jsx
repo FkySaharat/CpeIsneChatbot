@@ -113,9 +113,8 @@ class Chatbot extends Component {
     render() {
       
       return (
-      
-       
-        <Grid container style={{ backgroundColor: '#cfe8fc',height:'100%',width:'100%',position:"absolute"}} direction="column"  alignItems="center">
+           
+        <Grid container style={{ backgroundColor: '#cfe8fc',height:'100vh',width:'100vw',position:"absolute"}} direction="column"  alignItems="center">
             <Messagesbox item>
                 {this.state.messagebuffer.map(m=>{
                     if(m!==this.state.messagebuffer[this.state.messagebuffer.length-1]){
@@ -138,7 +137,6 @@ class Chatbot extends Component {
         
       );
     }
- 
 
 }
 
