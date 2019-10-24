@@ -1,15 +1,25 @@
 
 import React, {Component } from "react";
 import Listmessages from './messages';
-import Navbar from "./Navbar";
 import Api from '../api.json';
 
 import * as Scroll from 'react-scroll';
 import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
-import Container from '@material-ui/core/Container';
-import { makeStyles } from '@material-ui/core/styles';
 
+import {TextField, Button,Grid} from "@material-ui/core";
+import { styled } from '@material-ui/core/styles';
 
+const Messagesbox = styled(Grid)({
+  
+  background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+  border: 0,
+  borderRadius: 3,
+  boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+  color: 'white',
+  height: '80%',
+  width:'40%',
+  padding: '0 30px',
+});
 
 class Chatbot extends Component {
     state={
@@ -99,17 +109,14 @@ class Chatbot extends Component {
       }
     }
     
-    render() {
     
-      
-      
+    render() {
       
       return (
-        <div> 
-        <Navbar />
-        <Container>
-            <div>
-              
+      
+       
+        <Grid container style={{ backgroundColor: '#cfe8fc',height:'100%',width:'100%',position:"absolute"}} direction="column"  alignItems="center">
+            <Messagesbox item>
                 {this.state.messagebuffer.map(m=>{
                     if(m!==this.state.messagebuffer[this.state.messagebuffer.length-1]){
                       return <Listmessages value={m} name="test1"  />
@@ -118,15 +125,17 @@ class Chatbot extends Component {
                       return <Listmessages value={m} />
                     }
                 })}
-            </div>
+            </Messagesbox>
             
-            <div>
-              <input  type="text"  placeholder="Type here" ref="messages" onKeyPress={this.handleKeyPress}/>
-              <button   className="test1" to="test1" onClick={()=>this.handlemessage(this.refs.messages.value)} />  
-            </div>  
+            <Grid item> 
+              <TextField error label="Type Message here"  variant="outlined" type="text"  placeholder="Type here" ref="messages" onKeyPress={this.handleKeyPress}/>
+              <Button  variant="outlined" color="secondary"  className="test1" to="test1" onClick={()=>this.handlemessage(this.refs.messages.value)}>
+                  Send  
+              </Button>
+            </Grid>  
                        
-        </Container>
-        </div>
+        </Grid>
+        
       );
     }
  

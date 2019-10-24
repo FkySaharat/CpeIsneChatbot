@@ -1,6 +1,4 @@
 ## Dependencies
-# grommet  https://github.com/grommet/grommet-starter-new-app
-# react-scroll-to-bottom  https://www.npmjs.com/package/react-scroll-to-bottom
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
