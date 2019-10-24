@@ -1,21 +1,37 @@
 import React, { Component } from 'react';
 import chatlogo from "../chatlogo.png"
+import AppBar from '@material-ui/core/AppBar';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles(theme => ({
+    root: {
+      flexGrow: 1,
+      
+    },
+    
+    title: {
+      flexGrow: 1,
+      marginTop:10,
+      marginLeft:10,
+      marginBottom:10
+    },
+    bar:{
+      backgroundColor:"#1e1e1e"
+    }
+  }));
 
-
-class Navbar extends Component {
-    state = { 
-        name:this.props.value
-     }
-    render() { 
-        return ( 
-           
-            <div>
-                <img src={chatlogo} width="400" hight="50" /> 
+  export default function Navbar() {
+    const classes = useStyles();
+    
+  return ( 
+           <div>
+            <AppBar position="static" className={classes.bar} >          
+                <Typography  variant="h5" className={classes.title}> CPE ISNE Chatbot</Typography>        
+            </AppBar> 
             </div>
        
         );
-    }
+    
 }
  
-export default Navbar;
