@@ -106,8 +106,8 @@ class Chatbot extends Component {
       
       return (
         <div> 
+        <Navbar />
         <Container>
-            <Navbar />
             <div>
               
                 {this.state.messagebuffer.map(m=>{
