@@ -1,31 +1,41 @@
 import React, { Component } from 'react';
+import {Typography,Box,Grid} from '@material-ui/core';
+
+import { styled } from '@material-ui/core/styles';
 
 
+const Messagesbox = styled(Grid)({ 
+  background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+  border: 0,
+  borderRadius: 5,
+  boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+  color: 'white',
+  padding:'2px 5px'
+});
+
+  
 function Renderimage(params) { 
-    if(params.mode==="client"){
-        return(<div   ><img src={params.payload} style={{ height:150}}/></div>); 
-    }
-    else{
-        return(<div ><img src={params.payload} style={{ height:150}}/></div>); 
-    }
-         
+
+        return(<Box p={1} component="div"  >
+                    <img src={params.payload} style={{ height:150}}/>
+               </Box>); 
+       
 }
 
 function Rendermessage(params) {
-   
-    if(params.mode==="client") {
-        return(<div>{params.payload}</div>);
-    }
-    else{
-        return(<div>{params.payload}</div>);    
 
-    }
+        return( <Box component="div">
+                    <Messagesbox>
+                        <Typography component="div" style={{wordBreak:"break-word" }}>
+                        {params.payload}
+                        </Typography>
+                    </Messagesbox>
+                    
+                </Box>
+        );
 }
 
 class Messagemode extends Component {
-    state = {
-       
-    }
     
     render() { 
         
@@ -36,15 +46,20 @@ class Messagemode extends Component {
         if(this.props.value.mode==='client'){
             return(
             <div>
-                <p>Me</p>
-                {image ? Renderimage(this.props.value):Rendermessage(this.props.value)}
+                <Typography component="div"><Box textAlign="right" fontWeight="fontWeightLight" color="#9e9e9e">Me</Box></Typography>
+                <Box  display="flex" justifyContent="flex-end"  >     
+                        {image ? Renderimage(this.props.value):Rendermessage(this.props.value)}   
+                </Box>
+               
             </div>);
         }
         else{
             return(
-            <div> 
-                <p>cpebot</p>
-                {image ? Renderimage(this.props.value):Rendermessage(this.props.value)}
+            <div > 
+                <Typography component="div"><Box textAlign="left" fontWeight="fontWeightLight" color="#9e9e9e">Bot</Box></Typography>
+                <Box  display="flex" justifyContent="flex-start"  >                    
+                        {image ? Renderimage(this.props.value):Rendermessage(this.props.value)}                   
+                </Box>
             </div>);
         }
     }
@@ -58,16 +73,13 @@ class ListMessages extends Component {
         
         const content =this.state.value;
        
-        if(content.payload!==""){
-            
-            return( <div><Messagemode value={content} /></div>  ); 
+        if(content.payload!=="" && content.payload!==" "){
+            return(<Messagemode value={content} />); 
         }
         else{
+        
             return(<div></div>);
         }
-      
-        
-
     }
 }
  
