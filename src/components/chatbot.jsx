@@ -23,6 +23,7 @@ const ShowMessagesbox = styled(Grid)({
 });
 const InputMessagesbox = styled(Box)({ 
   minWidth:'375px',
+  marginBottom:"20px"
 });
 
 const CssTextField = styled(TextField)({
