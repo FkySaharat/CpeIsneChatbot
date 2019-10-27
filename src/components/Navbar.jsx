@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import chatlogo from "../chatlogo.png"
+import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
