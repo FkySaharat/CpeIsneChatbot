@@ -13,6 +13,7 @@ const Messagesbox = styled(Grid)({
   padding:'2px 5px'
 });
 
+
   
 function Renderimage(params) { 
 
@@ -26,17 +27,31 @@ function Rendermessage(params) {
         if(params.type==='overmessage'){
             return(
                 <Box component="div">
-                    <Messagesbox>
+                    <Box color="error.main" border={1} borderColor="error.main"
+                    borderRadius={20} p="2px 8px" >
                         <Typography component="div" style={{wordBreak:"break-word" }}>
-                            Please!,Type less than 150 word;
+                            Please!,do not type more than 150 characters
                         </Typography>
-                    </Messagesbox>
+                    </Box>
                 </Box>
             );
-        }else{
+        }else if(params.type==='errormessage'){
+            return(
+                <Box component="div">
+                    <Box color="error.main" border={1} borderColor="error.main"
+                    borderRadius={20} p="2px 8px" >
+                        <Typography component="div" style={{wordBreak:"break-word" }}>
+                        {params.payload}    
+                        </Typography>
+                    </Box>
+                </Box>
+            );
+
+        }
+        else{
             return( 
                 <Box component="div">
-                     <Messagesbox>
+                    <Messagesbox>
                         <Typography component="div" style={{wordBreak:"break-word" }}>
                             {params.payload}
                         </Typography>

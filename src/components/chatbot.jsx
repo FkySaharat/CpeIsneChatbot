@@ -87,21 +87,20 @@ class Chatbot extends Component {
     //communicate to chatbot
     handlemessage(para){ 
       this.setState({InputMessage:''});
-      
-      var c=false;
-      for(var i=0 ;i<para.length;i++){
-        if(para[i]!==" "){
-          c=true;
-          break;
+      var check=false;
+      for(let i=0;i<para.length;i++){
+        if(para[i].match(/[a-zA-Z0-9]/)){
+          check=true;
         }
-        
       }
-      console.log("leg",para.length);
-      if(c){
+      
+      
+      if(check){
         var attr=[]
         if(para.length>15){
           attr=[{mode:'bot',time:0,type:'overmessage',payload:'error'}];
           this.handleAddmessage(attr);
+          this.scrollToWithContainer()
         }
         else{
           attr=[{mode:'client',time:0,type:'message',payload:para}];
@@ -131,7 +130,10 @@ class Chatbot extends Component {
               }
             
                 this.scrollToWithContainer()            
-          }).catch((error) => console.log(error))
+          }).catch((error) => {
+                attr=[{mode:'bot',time:0,type:'errormessage',payload:"System Error Please Try Again"}];
+                this.handleAddmessage(attr);
+          })
         }
       }
      
@@ -185,11 +187,11 @@ class Chatbot extends Component {
               
                 {this.state.messagebuffer.map(m=>{
                   if(m!==this.state.messagebuffer[this.state.messagebuffer.length-1]){
-                    
+
                       return <div><Listmessages value={m}  /></div>
                     }
                     else{
-         
+                      console.log(m);
                       return <div name="lastmessage"><Listmessages value={m} /></div>
                     }
                   })}
