@@ -5,8 +5,8 @@ import Avatar from '@material-ui/core/Avatar';
 import cpe from '../cpe.png';
 import { Grid } from '@material-ui/core';
 import GoogleMapIcon from '../google-maps.png';
-
-
+import Fab from '@material-ui/core/Fab';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -39,8 +39,11 @@ const useStyles = makeStyles(theme => ({
   },
  
   avatar: {
-    margin: 10,
-    backgroundColor:"#ffffff"
+    marginLeft:'10px',
+    backgroundColor:"#ffffff",
+    "&:hover": {
+     opacity:'50%'}
+    
   },
 
   linelong:{
@@ -54,6 +57,8 @@ const useStyles = makeStyles(theme => ({
     color:'white',
     marginRight:'20px',
     fontFamily:"Roboto",
+    marginTop:'50px',
+
   },
   con:{
     color:'#666970',
@@ -62,9 +67,12 @@ const useStyles = makeStyles(theme => ({
   },
   names:{
     display:"flex",
-    flexDirection:"row-reverse"
+    flexDirection:"row-reverse",
+    marginTop:'50px',
   },
-  
+  fab: {
+    margin: theme.spacing(2),
+  },
   
 }));
 
@@ -73,19 +81,21 @@ function Webfooter() {
 
   return (
     <div >
-      <Grid container spacing={12} className={classes.names}>
+      <Grid container  className={classes.names}>
           <Grid  item s={6} className={classes.names} >
               <div>
                   <Typography variant="h4" className={classes.paper}>
                     <b>{'Powered By'} </b>
                     <div className={classes.linelong}></div>
                   </Typography> 
-                  <Typography fontFamily='Roboto' marked="left" gutterBottom className={classes.pa}>                        
-                      CHOMCHANOK  YAWANA,
-                      NUTTAPON  HANKAMOLSIRI,
-                      PICHAON  RINRIT,
-                      SAHARAT  DIEWTRAKUL,
-                      SAOWALUK  KAEWNOK
+
+                  <Typography variant='body1' marked="left" gutterBottom className={classes.pa}>                        
+                      <br/>{'CHOMCHANOK  YAWANA'} <br/>
+                      {'NUTTAPON  HANKAMOLSIRI'} <br/>
+                      {'PICHAON  RINRIT'} <br/>
+                      {'SAHARAT  DIEWTRAKUL'} <br/>
+                      {'SAOWALUK  KAEWNOK'}<br/>
+
                       <b >ISNE #5</b>
                     
                   </Typography>
@@ -93,27 +103,31 @@ function Webfooter() {
               </div>
           </Grid>  
 
-          <Grid item s={6} className={classes.content}>
+          <Grid  className={classes.content}>
             <Typography variant='h4'>
               <b>{'Contact Us'}</b> 
               <div className={classes.linelong}></div>
 
             </Typography>
-            <Typography className={classes.con}>
+            <Typography className={classes.con} variant='body1'>
 
-              <p><b>Department of Computer Engineering <br/> 30th Building 4th and 5th Floor</b></p>
-              <p>Tel: 084-614-0006, 0-5394-2023  <br/> Faculty of Engineering, Chiang Mai University  <br/>
+              <b><br/>Department of Computer Engineering <br/> 30th Building 4th and 5th Floor</b>
+              <br/>Tel: 084-614-0006, 0-5394-2023  <br/> Faculty of Engineering, Chiang Mai University  <br/>
                 239, Huay Kaew Road, Muang District, <br/>
-                Chiang Mai Thailand, 50200</p>
+                Chiang Mai Thailand, 50200
             </Typography>  
-            <Typography variant='h6'><u>Click on icon for more info</u></Typography>           
+                       
             <Grid container display='flex' flexDirection='row'>
               <a href="https://www.google.co.th/maps/place/คณะวิศวกรรมศาสตร์+มหาวิทยาลัยเชียงใหม่/@18.7956724,98.9506894,17z/data=!4m5!3m4!1s0x30da3a6e0d8891c9:0x2c728e2876b2505c!8m2!3d18.7956866!4d98.9528731?hl=th">
                 <Avatar className={classes.avatar} src={GoogleMapIcon} display='flex' flexDirection='row' title='Go to Google Map'></Avatar>
               </a>
+
               <a href='https://cpe.eng.cmu.ac.th/2013/index.php'>
-                <Avatar  src={cpe} className={classes.avatar} display='flex' flexDirection='row' title='Go to CPE website'>  </Avatar>
+                <Avatar  src={cpe} className={classes.avatar} display='flex'  flexDirection='row' title='Go to CPE website'></Avatar>
               </a>
+                
+                
+
             </Grid>    
            
 
@@ -139,5 +153,6 @@ export default function Footer() {
         </div>
     </div>
   );
+
 }
 
