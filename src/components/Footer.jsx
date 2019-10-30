@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import cpe from '../cpe.png';
-import { Grid, Box } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import GoogleMapIcon from '../google-maps.png';
 
 
@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
   footer: {
     padding: theme.spacing(2),
     marginTop: 'auto',
-    backgroundColor: '#0D0D0D',
+    backgroundColor: '#212121',
     
   },
  
@@ -81,11 +81,11 @@ function Webfooter() {
                     <div className={classes.linelong}></div>
                   </Typography> 
                   <Typography fontFamily='Roboto' marked="left" gutterBottom className={classes.pa}>                        
-                      <p>{'CHOMCHANOK  YAWANA'}</p>
-                      <p>{'NUTTAPON  HANKAMOLSIRI'}</p>
-                      <p>{'PICHAON  RINRIT'}</p>
-                      <p>{'SAHARAT  DIEWTRAKUL'}</p>
-                      <p>{'SAOWALUK  KAEWNOK'}</p>
+                      CHOMCHANOK  YAWANA,
+                      NUTTAPON  HANKAMOLSIRI,
+                      PICHAON  RINRIT,
+                      SAHARAT  DIEWTRAKUL,
+                      SAOWALUK  KAEWNOK
                       <b >ISNE #5</b>
                     
                   </Typography>
@@ -141,21 +141,3 @@ export default function Footer() {
   );
 }
 
-{/* <Grid container spacing={12}>
-        <Grid item s={6} className={classes.paper}>
-
-            <Typography variant="h5">
-              <b>{'Powered By ISNE#5'} </b>
-            </Typography> 
-               <div className={classes.linelong}></div>
-            <Typography fontFamily='Roboto' marked="left" gutterBottom>                        
-                <p>{'CHOMCHANOK  YAWANA'}</p>
-                <p>{'NUTTAPON  HANKAMOLSIRI'}</p>
-                <p>{'PICHAON  RINRIT'}</p>
-                <p>{'SAHARAT  DIEWTRAKUL'}</p>
-                <p>{'SAOWALUK  KAEWNOK'}</p>
-                
-               
-            </Typography>
-        </Grid>                   
-    </Grid> */}

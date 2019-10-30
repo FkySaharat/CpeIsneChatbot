@@ -17,7 +17,7 @@ const Messagesbox = styled(Grid)({
 function Renderimage(params) { 
 
         return(<Box p={1} component="div"  >
-                    <img src={params.payload} style={{ height:150}}/>
+                    <img src={params.payload} alt="" style={{ height:150}}/>
                </Box>); 
        
 }
