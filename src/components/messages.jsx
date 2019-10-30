@@ -23,16 +23,28 @@ function Renderimage(params) {
 }
 
 function Rendermessage(params) {
-
-        return( <Box component="div">
+        if(params.type==='overmessage'){
+            return(
+                <Box component="div">
                     <Messagesbox>
                         <Typography component="div" style={{wordBreak:"break-word" }}>
-                        {params.payload}
+                            Please!,Type less than 150 word;
                         </Typography>
                     </Messagesbox>
-                    
                 </Box>
-        );
+            );
+        }else{
+            return( 
+                <Box component="div">
+                     <Messagesbox>
+                        <Typography component="div" style={{wordBreak:"break-word" }}>
+                            {params.payload}
+                        </Typography>
+                   </Messagesbox>
+               </Box>
+            );
+        }
+       
 }
 
 class Messagemode extends Component {

@@ -11,22 +11,24 @@ import { styled } from '@material-ui/core/styles';
 
 const ShowMessagesbox = styled(Grid)({ 
   background: '#eeeeee',
-  border: 0,
-  borderRadius: 5,
-  boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+  borderTopLeftRadius:"4px",
+  borderTopRightRadius:"4px",
   color: 'white',
   height: '75vh',
   width:'375px',
   maxHeight:'500px',
   padding: '15px 20px',
-  marginTop:'20px',
 });
 const InputMessagesbox = styled(Box)({ 
-  minWidth:'375px',
-  marginBottom:"20px"
+  minWidth:'360px',
+  marginBottom:"20px",
+  borderBottomLeftRadius:"4px",
+  borderBottomRighttRadius:"4px",
+  background: '#eeeeee',
+  
 });
 
-const CssTextField = styled(TextField)({
+const CssTextField = styled(InputBase)({
  
     '& label.Mui-focused': {
       color: 'blue',
@@ -45,7 +47,12 @@ const CssTextField = styled(TextField)({
         borderColor: 'blue',
       },
     },
-    
+    borderRadius: 10,
+    position: 'relative',
+    backgroundColor: '#e0e0e0',
+    fontSize: 16,
+    width: 'auto',
+    padding: '10px 12px',
   
 });
 
@@ -80,6 +87,7 @@ class Chatbot extends Component {
     //communicate to chatbot
     handlemessage(para){ 
       this.setState({InputMessage:''});
+      
       var c=false;
       for(var i=0 ;i<para.length;i++){
         if(para[i]!==" "){
@@ -88,38 +96,44 @@ class Chatbot extends Component {
         }
         
       }
+      console.log("leg",para.length);
       if(c){
-        
-        var attr=[{mode:'client',time:0,type:'message',payload:para}];
-        this.handleAddmessage(attr);
-        this.scrollToWithContainer()
-        fetch(Api.Url+para+'&sessionId=2',{
-              method:'GET',
-              headers: new Headers({
-                      'Content-Type': 'application/json',
-                      'Authorization': Api.Authorization
-              })  
-        }).then((res) => {
-              return res.json(); 
-        }).then((data)=>{
-            var m =data.result.fulfillment.messages;
-            for(let i=0;i<m.length;i++){
-              if(m[i].speech){
-                attr=[{mode:'bot',time:0,type:'message',payload:m[i].speech}];
-                this.handleAddmessage(attr);
+        var attr=[]
+        if(para.length>15){
+          attr=[{mode:'bot',time:0,type:'overmessage',payload:'error'}];
+          this.handleAddmessage(attr);
+        }
+        else{
+          attr=[{mode:'client',time:0,type:'message',payload:para}];
+          this.handleAddmessage(attr);
+          this.scrollToWithContainer()
+          fetch(Api.Url+para+'&sessionId=2',{
+                method:'GET',
+                headers: new Headers({
+                        'Content-Type': 'application/json',
+                        'Authorization': Api.Authorization
+                })  
+          }).then((res) => {
+                return res.json(); 
+          }).then((data)=>{
+              var m =data.result.fulfillment.messages;
+              for(let i=0;i<m.length;i++){
+                if(m[i].speech){
+                  attr=[{mode:'bot',time:0,type:'message',payload:m[i].speech}];
+                  this.handleAddmessage(attr);
+                }
               }
-            }
-            for(let i=0;i<m.length;i++){
-              if(m[i].imageUrl){
-                attr=[{mode:'bot',time:0,type:'image',payload:m[i].imageUrl}];
-                this.handleAddmessage(attr);
+              for(let i=0;i<m.length;i++){
+                if(m[i].imageUrl){
+                  attr=[{mode:'bot',time:0,type:'image',payload:m[i].imageUrl}];
+                  this.handleAddmessage(attr);
+                }
               }
-            }
-            console.log(m);
-              this.scrollToWithContainer()            
-        }).catch((error) => console.log(error))
+            
+                this.scrollToWithContainer()            
+          }).catch((error) => console.log(error))
+        }
       }
-
      
     }
     
@@ -181,11 +195,9 @@ class Chatbot extends Component {
                   })}
             </ShowMessagesbox>
             
-            <InputMessagesbox  mt={1} height={55}  display="flex" justifyContent="center"> 
+            <InputMessagesbox  p={1} height={55}  display="flex" justifyContent="center"> 
               <Box  component="div" width="100%">
-                <CssTextField  id="standard-multiline-static" multiline rows="1"   name="InputMessage"  value={this.state.InputMessage}   variant="outlined" placeholder="Type here"  onKeyDown={this.handleKeyPress}    onChange={this.handleChange} style={{width:"100%"}} /> 
-                
-                 
+                <CssTextField  id="standard-multiline-static" multiline rows="2"   name="InputMessage"  value={this.state.InputMessage}   variant="outlined" placeholder="Type here"  onKeyDown={this.handleKeyPress}    onChange={this.handleChange} style={{width:"100%"}} /> 
               </Box>
               
               <Box  component="div" style={{marginLeft:'2px'}} >
