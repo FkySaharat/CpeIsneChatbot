@@ -2,17 +2,16 @@
 import React, {Component } from "react";
 import Listmessages from './messages';
 import Api from '../api.json';
-import bg from '../bgChatbot.png';
+//import bg from '../bgChatbot.png';
+import bgh from '../Halloween.jpg';
 import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 
-import {TextField, Button,Grid, Box,InputBase} from "@material-ui/core";
+import {Button,Grid, Box,InputBase} from "@material-ui/core";
 import { styled } from '@material-ui/core/styles';
 
 
 const ShowMessagesbox = styled(Grid)({ 
   background: '#eeeeee',
-  borderTopLeftRadius:"4px",
-  borderTopRightRadius:"4px",
   color: 'white',
   height: '75vh',
   width:'375px',
@@ -22,8 +21,8 @@ const ShowMessagesbox = styled(Grid)({
 const InputMessagesbox = styled(Box)({ 
   minWidth:'360px',
   marginBottom:"20px",
-  borderBottomLeftRadius:"4px",
-  borderBottomRighttRadius:"4px",
+  borderBottomLeftRadius:"10px",
+  borderBottomRightRadius:"10px",
   background: '#eeeeee',
   
 });
@@ -60,7 +59,7 @@ const CssTextField = styled(InputBase)({
 class Chatbot extends Component {
     state={
       count:0,
-      messagebuffer:[{mode:'',time:0,type:'message',payload:''}],
+      messagebuffer:[{mode:'',time:0,type:'message',payload:"Hi,I'm CPEchatbot.How can I help you?"}],
       InputMessage:'',
     
     };
@@ -97,7 +96,7 @@ class Chatbot extends Component {
       
       if(check){
         var attr=[]
-        if(para.length>15){
+        if(para.length>150){
           attr=[{mode:'bot',time:0,type:'overmessage',payload:'error'}];
           this.handleAddmessage(attr);
           this.scrollToWithContainer()
@@ -178,10 +177,10 @@ class Chatbot extends Component {
     
     render() {
       /* const Messages=this.state.InputMessage; */
-  
+      
       return (
           
-        <Grid  container style={{position:"relative",height:'100vh',width:'100%',minWidth:"375px",backgroundImage:`url(${bg})`,backgroundSize:"cover",backgroundPosition:"center center"}} direction="column"  alignItems="center">
+        <Grid  container style={{position:"relative",height:'100vh',width:'100%',minWidth:"375px",backgroundImage:`url(${bgh})`,backgroundSize:"cover",backgroundPosition:"center center"}} direction="column"  alignItems="center">
 
             <ShowMessagesbox item id="scroll-container" style={{overflowY:"scroll"}}>
               
