@@ -21,7 +21,8 @@ const useStyles = makeStyles(theme => ({
       color:'white'
     },
     bar:{
-      backgroundColor:"#1e1e1e"
+      backgroundColor:"#1e1e1e",
+      minWidth:"375px"
     }
   }));
 
