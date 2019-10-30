@@ -13,26 +13,53 @@ const Messagesbox = styled(Grid)({
   padding:'2px 5px'
 });
 
+
   
 function Renderimage(params) { 
 
         return(<Box p={1} component="div"  >
-                    <img src={params.payload} style={{ height:150}}/>
+                    <img src={params.payload} alt="" style={{ height:150}}/>
                </Box>); 
        
 }
 
 function Rendermessage(params) {
+        if(params.type==='overmessage'){
+            return(
+                <Box component="div">
+                    <Box color="error.main" border={1} borderColor="error.main"
+                    borderRadius={20} p="2px 8px" >
+                        <Typography component="div" style={{wordBreak:"break-word" }}>
+                            Please!,do not type more than 150 characters
+                        </Typography>
+                    </Box>
+                </Box>
+            );
+        }else if(params.type==='errormessage'){
+            return(
+                <Box component="div">
+                    <Box color="error.main" border={1} borderColor="error.main"
+                    borderRadius={20} p="2px 8px" >
+                        <Typography component="div" style={{wordBreak:"break-word" }}>
+                        {params.payload}    
+                        </Typography>
+                    </Box>
+                </Box>
+            );
 
-        return( <Box component="div">
+        }
+        else{
+            return( 
+                <Box component="div">
                     <Messagesbox>
                         <Typography component="div" style={{wordBreak:"break-word" }}>
-                        {params.payload}
+                            {params.payload}
                         </Typography>
-                    </Messagesbox>
-                    
-                </Box>
-        );
+                   </Messagesbox>
+               </Box>
+            );
+        }
+       
 }
 
 class Messagemode extends Component {

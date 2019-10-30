@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import cpe from '../cpe.png';
-import { Grid, Box } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import GoogleMapIcon from '../google-maps.png';
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
   footer: {
     padding: theme.spacing(2),
     marginTop: 'auto',
-    backgroundColor: '#0D0D0D',
+    backgroundColor: '#212121',
     
   },
  
@@ -88,12 +88,14 @@ function Webfooter() {
                     <b>{'Powered By'} </b>
                     <div className={classes.linelong}></div>
                   </Typography> 
+
                   <Typography variant='body1' marked="left" gutterBottom className={classes.pa}>                        
                       <br/>{'CHOMCHANOK  YAWANA'} <br/>
                       {'NUTTAPON  HANKAMOLSIRI'} <br/>
                       {'PICHAON  RINRIT'} <br/>
                       {'SAHARAT  DIEWTRAKUL'} <br/>
                       {'SAOWALUK  KAEWNOK'}<br/>
+
                       <b >ISNE #5</b>
                     
                   </Typography>
@@ -151,4 +153,6 @@ export default function Footer() {
         </div>
     </div>
   );
+
 }
+
