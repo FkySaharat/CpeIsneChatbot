@@ -27,11 +27,12 @@ export default class extends Component{
     //const isMobile =this.state.width <= 500;
 
     return(
+      
       <Fragment>
         <Navbar/>
         <Chatbot/>
         <Footer/>
-      </Fragment>
+      </Fragment> 
     );
   }
 }
