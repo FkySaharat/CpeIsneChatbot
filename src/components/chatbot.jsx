@@ -4,11 +4,23 @@ import Listmessages from './messages';
 import Api from '../api.json';
 //import bg from '../bgChatbot.png';
 import bgh from '../Halloween.jpg';
-import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
-import styled from 'styled-components';
+
+
 
 import {Button,Grid, Box,InputBase} from "@material-ui/core";
-//import { styled } from '@material-ui/core/styles';
+import { styled } from '@material-ui/core/styles';
+
+import ScrollToBottom from 'react-scroll-to-bottom';
+
+////speech to text
+import { css } from 'glamor';
+const ROOT_CSS = css({
+  height: 600,
+  width: 360,
+  paddingLeft: '10px'
+});
+
+
 
 
 const ShowMessagesbox = styled(Grid)({ 
@@ -20,13 +32,6 @@ const ShowMessagesbox = styled(Grid)({
   padding: '15px 20px',
 
 });
-
-const Small = styled.div`
-  width:100%;
- 
-`;
-
-
 
 const InputMessagesbox = styled(Box)({ 
   minWidth:'360px',
@@ -106,15 +111,19 @@ class Chatbot extends Component {
       
       if(check){
         var attr=[]
-        if(para.length>50){
+
+        if(para.length>150){
           attr=[{mode:'bot',time:0,type:'overmessage',payload:'error'}];
           this.handleAddmessage(attr);
-          this.scrollToWithContainer()
+        
+
         }
         else{
           attr=[{mode:'client',time:0,type:'message',payload:para}];
           this.handleAddmessage(attr);
+
           this.scrollToWithContainer()
+
           fetch(Api.Url+para+'&sessionId=2',{
                 method:'GET',
                 headers: new Headers({
@@ -138,7 +147,9 @@ class Chatbot extends Component {
                 }
               }
             
+
                 this.scrollToWithContainer()            
+
           }).catch((error) => {
                 attr=[{mode:'bot',time:0,type:'errormessage',payload:"System Error Please Try Again"}];
                 this.handleAddmessage(attr);
@@ -149,32 +160,8 @@ class Chatbot extends Component {
     }
     
    
-    //ScrollTothelastmessage
-    scrollToWithContainer() {
 
-      let goToContainer = new Promise((resolve, reject) => {
-  
-        Events.scrollEvent.register('end', () => {
-          resolve();
-          Events.scrollEvent.remove('end');
-        });
-  
-        scroller.scrollTo('scroll-container', {
-          duration: 8,
-          delay: 0,
-          smooth: 'easeInOutQuart'
-        });
-  
-      });
-  
-      goToContainer.then(() =>
-        scroller.scrollTo('lastmessage', {
-          duration: 100,
-          delay: 0,
-          smooth: 'easeInOutQuart',
-          containerId: 'scroll-container'
-        }));
-    }
+   
 
     //Enter to send messages
     handleKeyPress = (event) => {
@@ -183,44 +170,53 @@ class Chatbot extends Component {
       }
 
     }
+
   
     
     render() {
       /* const Messages=this.state.InputMessage; */
-      
+
+    
       return (
         
-          //relative
-        <Grid  container style={{position:"relative",height:'100vh',width:'100%',minWidth:"375px",
-        backgroundImage:`url(${bgh})`,backgroundSize:"cover",backgroundPosition:"center center"}} direction="column"  alignItems="center">
-      
-            <ShowMessagesbox item id="scroll-container" style={{overflowY:"scroll"}}>
-              
-                {this.state.messagebuffer.map(m=>{
-                  if(m!==this.state.messagebuffer[this.state.messagebuffer.length-1]){
+        <Grid  container style={{position:"relative",height:'100vh',width:'100%',minWidth:"800px",backgroundImage:`url(${bgh})`,backgroundSize:"cover",backgroundPosition:"center center"}} direction="column"  alignItems="center">
 
-                      return <div><Listmessages value={m}  /></div>
-                    }
-                    else{
-                      console.log(m);
-                      return <div name="lastmessage"><Listmessages value={m} /></div>
-                    }
-                  })}
-            </ShowMessagesbox>
+              <div style={{width:'376px',backgroundColor:'lightyellow  ', marginTop: '63px',}}> 
+
+              <ScrollToBottom item className={ ROOT_CSS } >
+    
+                  {this.state.messagebuffer.map(m=>{
+                    if(m!==this.state.messagebuffer[this.state.messagebuffer.length-1]){
+
+                        return <div><Listmessages value={m}  /></div>
+                      }
+                      else{
+                        console.log(m);
+                        return <div ><Listmessages value={m} /></div>
+                      }
+                    })}
+              </ScrollToBottom>
+              </div>
+
+        
             
-            <InputMessagesbox  p={1} height={55}  display="flex" justifyContent="center" > 
+            <InputMessagesbox  p={1} height={55}  display="flex" justifyContent="center" style={{position:"relative"}}> 
               <Box  component="div" width="100%">
                 <CssTextField  id="standard-multiline-static" multiline rows="2"   name="InputMessage"  value={this.state.InputMessage}   variant="outlined" placeholder="Type here"  onKeyDown={this.handleKeyPress}    onChange={this.handleChange} style={{width:"100%"}} /> 
               </Box>
               
+
               <Box  component="div" style={{marginLeft:'2px'}} >
                 <Button variant="contained" color="primary"   onClick={()=>this.handlemessage(this.state.InputMessage)} style={{width:"50px",height:"100%",margin:"1px"}}>
                      send
                 </Button> 
+
+             
               </Box>
             </InputMessagesbox>  
            
             
+
         </Grid>
        
         

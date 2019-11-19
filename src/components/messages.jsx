@@ -11,7 +11,9 @@ const Messagesbox = styled(Grid)({
   borderRadius: 5,
   boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
   color: 'white',
-  padding:'2px 5px'
+
+  padding:'2px 5px',
+
 });
 
 
@@ -72,7 +74,9 @@ function Rendermessage(params) {
                     <Box color="error.main" border={1} borderColor="error.main"
                     borderRadius={20} p="2px 8px" >
                         <Typography component="div" style={{wordBreak:"break-word" }}>
-                            Do not type more than 50 characters!
+
+                            Please!,do not type more than 150 characters
+
                         </Typography>
                     </Box>
                 </Box>
@@ -92,6 +96,8 @@ function Rendermessage(params) {
         }
         if(params.mode==="client"){
             return(
+
+
                <Box component="div">
                 <Messagesbox style={{background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'}}>
                     <Typography component="div" style={{wordBreak:"break-word" }}>
@@ -104,22 +110,26 @@ function Rendermessage(params) {
         }
         if(params.mode==='bot'){
             return(
+
                 <Box component="div">
                     <Messagesbox style={{background: 'linear-gradient(45deg, #605C4E 30%, #363020 90%)'}}>
                         <Typography component="div" style={{wordBreak:"break-word" }}>
                             {params.payload}
                         </Typography>
+
                     </Messagesbox>
                 </Box>
             );
         }
         else{
             return(
+
                 <Box component="div">
                     <Messagesbox style={{background: 'linear-gradient(45deg, #605C4E 30%, #363020 90%)'}}>
                         <Typography component="div" style={{wordBreak:"break-word" }}>
                             {params.payload}
                         </Typography>
+
                     </Messagesbox>
                 </Box>
             );
@@ -159,6 +169,7 @@ class Messagemode extends Component {
         }
     }
 }
+
  
 class ListMessages extends Component {
     state = {
