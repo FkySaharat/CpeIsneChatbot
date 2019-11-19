@@ -13,8 +13,9 @@ import ScrollToBottom from 'react-scroll-to-bottom';
 
 ////speech to text
 import { css } from 'glamor';
+
 const ROOT_CSS = css({
-  height: 600,
+  height: 500,
   width: 360,
   paddingLeft: '10px'
 });
@@ -68,7 +69,7 @@ const CssTextField = styled(InputBase)({
 });
 
 
-class Chatbot extends Component {
+class ChatbotMobile extends Component {
     state={
       count:0,
       messagebuffer:[{mode:'',time:0,type:'message',payload:"Hi,I'm CPEchatbot.How can I help you?"}],
@@ -167,9 +168,9 @@ class Chatbot extends Component {
     
       return (
         
-        <Grid  container style={{position:"relative",height:'100vh',width:'100%',minWidth:"768px",backgroundImage:`url(${bgh})`,backgroundSize:"cover",backgroundPosition:"center center"}} direction="column"  alignItems="center">
+        <div >
 
-              <div style={{width:'376px',backgroundColor:'lightyellow  ', marginTop: '63px',}}> 
+              <div style={{width:'100%',backgroundColor:'white  ', marginTop: '63px',}}> 
 
               <ScrollToBottom item className={ ROOT_CSS } >
     
@@ -203,7 +204,7 @@ class Chatbot extends Component {
            
             
                         
-        </Grid>
+        </div>
        
         
       );
@@ -211,5 +212,4 @@ class Chatbot extends Component {
 
 
 }
-
-export default Chatbot;
+export default ChatbotMobile;

@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#212121',
     minWidth:"375px",
     top: "2000px",
-    width:"100%",
+    
   },
  
   avatar: {
@@ -61,6 +61,7 @@ const useStyles = makeStyles(theme => ({
     fontFamily:"Roboto",
     marginTop:'50px',
     marginBottom:'10px',
+
   },
   con:{
     color:'#666970',
@@ -140,7 +141,7 @@ function Webfooter() {
 }
 
 
-export default function Footer() {
+export default function FooterMobile() {
   const classes = useStyles();
 
   return (
