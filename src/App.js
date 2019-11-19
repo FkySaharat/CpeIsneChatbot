@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import {Chatbot,Navbar,Footer,NavbarMobile,ChatbotMobile,FooterMobile} from './components'; 
 
-
 export default class extends Component{
   constructor(){
     super();
