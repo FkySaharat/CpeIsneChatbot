@@ -37,8 +37,8 @@ const useStyles = makeStyles(theme => ({
     marginTop: 'auto',
     backgroundColor: '#212121',
     minWidth:"375px",
-    width:"100%"
-
+    width:"100%",
+    paddingBottom:"5px",
   },
  
   avatar: {

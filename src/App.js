@@ -30,7 +30,7 @@ export default class extends Component{
     //if(this.state.width>500){
 
       return(
-        <Fragment position="realtive">
+        <Fragment >
           <Navbar/>  
           <Chatbot/>
           <Footer/>
