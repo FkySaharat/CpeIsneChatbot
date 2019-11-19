@@ -32,12 +32,13 @@ const useStyles = makeStyles(theme => ({
     
   }, 
   footer: {
-   
+
+    //padding: theme.spacing(2),
     marginTop: 'auto',
     backgroundColor: '#212121',
     minWidth:"375px",
-    top: "2000px",
-    
+    width:"100%"
+
   },
  
   avatar: {
@@ -83,7 +84,9 @@ function Webfooter() {
 
   return (
     <div >
-      <Grid container  className={classes.names}>
+
+      <Grid container  className={classes.names} >
+
           <Grid  item s={6} className={classes.names} >
               <div>
                   <Typography variant="h4" className={classes.paper}>

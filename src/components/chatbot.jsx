@@ -6,6 +6,7 @@ import Api from '../api.json';
 import bgh from '../Halloween.jpg';
 
 
+
 import {Button,Grid, Box,InputBase} from "@material-ui/core";
 import { styled } from '@material-ui/core/styles';
 
@@ -19,7 +20,7 @@ const ROOT_CSS = css({
   paddingLeft: '10px'
 });
 
-///////////////////
+
 
 
 const ShowMessagesbox = styled(Grid)({ 
@@ -29,7 +30,9 @@ const ShowMessagesbox = styled(Grid)({
   width:'375px',
   maxHeight:'500px',
   padding: '15px 20px',
+
 });
+
 const InputMessagesbox = styled(Box)({ 
   minWidth:'360px',
   marginBottom:"20px",
@@ -108,15 +111,19 @@ class Chatbot extends Component {
       
       if(check){
         var attr=[]
+
         if(para.length>150){
           attr=[{mode:'bot',time:0,type:'overmessage',payload:'error'}];
           this.handleAddmessage(attr);
         
+
         }
         else{
           attr=[{mode:'client',time:0,type:'message',payload:para}];
           this.handleAddmessage(attr);
-        
+
+          this.scrollToWithContainer()
+
           fetch(Api.Url+para+'&sessionId=2',{
                 method:'GET',
                 headers: new Headers({
@@ -140,7 +147,9 @@ class Chatbot extends Component {
                 }
               }
             
-                          
+
+                this.scrollToWithContainer()            
+
           }).catch((error) => {
                 attr=[{mode:'bot',time:0,type:'errormessage',payload:"System Error Please Try Again"}];
                 this.handleAddmessage(attr);
@@ -151,6 +160,7 @@ class Chatbot extends Component {
     }
     
    
+
    
 
     //Enter to send messages
@@ -160,10 +170,12 @@ class Chatbot extends Component {
       }
 
     }
+
   
     
     render() {
       /* const Messages=this.state.InputMessage; */
+
     
       return (
         
@@ -193,22 +205,23 @@ class Chatbot extends Component {
                 <CssTextField  id="standard-multiline-static" multiline rows="2"   name="InputMessage"  value={this.state.InputMessage}   variant="outlined" placeholder="Type here"  onKeyDown={this.handleKeyPress}    onChange={this.handleChange} style={{width:"100%"}} /> 
               </Box>
               
+
               <Box  component="div" style={{marginLeft:'2px'}} >
                 <Button variant="contained" color="primary"   onClick={()=>this.handlemessage(this.state.InputMessage)} style={{width:"50px",height:"100%",margin:"1px"}}>
                      send
                 </Button> 
-               
+
+             
               </Box>
             </InputMessagesbox>  
            
             
-                        
+
         </Grid>
        
         
       );
     }
-
 
 }
 

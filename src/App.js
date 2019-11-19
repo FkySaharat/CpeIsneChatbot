@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import {Chatbot,Navbar,Footer} from './components'; 
 
-
 export default class extends Component{
   constructor(){
     super();
@@ -24,14 +23,23 @@ export default class extends Component{
   };
   
   render(){
-    //const isMobile =this.state.width <= 500;
+    const isMobile =this.state.width <= 500;
+    console.log(this.state.width);
 
-    return(
-      <Fragment>
-        <Navbar/>
-        <Chatbot/>
-        <Footer/>
-      </Fragment>
-    );
+
+    //if(this.state.width>500){
+
+      return(
+        <Fragment position="realtive">
+          <Navbar/>  
+          <Chatbot/>
+          <Footer/>
+        </Fragment>
+      );
+    //}
+    //else{
+
+    //}
+
   }
 }
