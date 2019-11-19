@@ -9,6 +9,7 @@ import bgh from '../Halloween.jpg';
 
 import {Button,Grid, Box,InputBase} from "@material-ui/core";
 import { styled } from '@material-ui/core/styles';
+import QrReader from 'react-qr-reader';
 
 import ScrollToBottom from 'react-scroll-to-bottom';
 
@@ -76,7 +77,7 @@ class Chatbot extends Component {
       count:0,
       messagebuffer:[{mode:'',time:0,type:'message',payload:"Hi,I'm CPEchatbot.How can I help you?"}],
       InputMessage:'',
-    
+      showqr:false
     };
 
     constructor() {
@@ -172,7 +173,22 @@ class Chatbot extends Component {
     }
 
   
+    handleScan = data => {
+      if (data!=null) {
+        this.handlemessage(data); 
+        this.setState({showqr:false});
+      }
+    }
     
+    handleqr = data => {
+      
+      this.setState({showqr:!this.state.showqr});
+    }
+
+    handleError = err => {
+      console.error(err)
+    }
+
     render() {
       /* const Messages=this.state.InputMessage; */
 
@@ -211,10 +227,20 @@ class Chatbot extends Component {
                      send
                 </Button> 
 
-             
+                <Button variant="contained" color="primary"   onClick={()=>this.handleqr()} style={{width:"50px",height:"100%",margin:"1px"}}>
+                     qr
+                </Button>
+
               </Box>
             </InputMessagesbox>  
-           
+            {this.state.showqr &&
+            <QrReader
+             delay={300}
+             onError={this.handleError}
+             onScan={this.handleScan}
+            style={{ width: '120px' }}
+            />
+            }}
             
 
         </Grid>
