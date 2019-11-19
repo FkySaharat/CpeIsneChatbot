@@ -5,9 +5,10 @@ import Api from '../api.json';
 //import bg from '../bgChatbot.png';
 import bgh from '../Halloween.jpg';
 import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+import styled from 'styled-components';
 
 import {Button,Grid, Box,InputBase} from "@material-ui/core";
-import { styled } from '@material-ui/core/styles';
+//import { styled } from '@material-ui/core/styles';
 
 
 const ShowMessagesbox = styled(Grid)({ 
@@ -17,7 +18,16 @@ const ShowMessagesbox = styled(Grid)({
   width:'375px',
   maxHeight:'500px',
   padding: '15px 20px',
+
 });
+
+const Small = styled.div`
+  width:100%;
+ 
+`;
+
+
+
 const InputMessagesbox = styled(Box)({ 
   minWidth:'360px',
   marginBottom:"20px",
@@ -96,7 +106,7 @@ class Chatbot extends Component {
       
       if(check){
         var attr=[]
-        if(para.length>150){
+        if(para.length>50){
           attr=[{mode:'bot',time:0,type:'overmessage',payload:'error'}];
           this.handleAddmessage(attr);
           this.scrollToWithContainer()
@@ -179,9 +189,11 @@ class Chatbot extends Component {
       /* const Messages=this.state.InputMessage; */
       
       return (
-          
-        <Grid  container style={{position:"relative",height:'100vh',width:'100%',minWidth:"375px",backgroundImage:`url(${bgh})`,backgroundSize:"cover",backgroundPosition:"center center"}} direction="column"  alignItems="center">
-
+        
+          //relative
+        <Grid  container style={{position:"relative",height:'100vh',width:'100%',minWidth:"375px",
+        backgroundImage:`url(${bgh})`,backgroundSize:"cover",backgroundPosition:"center center"}} direction="column"  alignItems="center">
+      
             <ShowMessagesbox item id="scroll-container" style={{overflowY:"scroll"}}>
               
                 {this.state.messagebuffer.map(m=>{
@@ -196,7 +208,7 @@ class Chatbot extends Component {
                   })}
             </ShowMessagesbox>
             
-            <InputMessagesbox  p={1} height={55}  display="flex" justifyContent="center"> 
+            <InputMessagesbox  p={1} height={55}  display="flex" justifyContent="center" > 
               <Box  component="div" width="100%">
                 <CssTextField  id="standard-multiline-static" multiline rows="2"   name="InputMessage"  value={this.state.InputMessage}   variant="outlined" placeholder="Type here"  onKeyDown={this.handleKeyPress}    onChange={this.handleChange} style={{width:"100%"}} /> 
               </Box>
