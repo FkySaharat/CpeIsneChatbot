@@ -31,7 +31,9 @@ const useStyles = makeStyles(theme => ({
     
   return ( 
            <div>
-            <AppBar position="static" className={classes.bar} >      
+
+            <AppBar position="fixed" className={classes.bar} >      
+
               <Button>
                 <Typography  variant="h5" className={classes.title}> <b>CPE ISNE Chatbot</b></Typography>        
               </Button>    
