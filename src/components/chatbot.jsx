@@ -242,7 +242,7 @@ class Chatbot extends Component {
               </Box>
             </InputMessagesbox>  
             {this.state.showqr &&<div id="qr" style={{position:"fixed",left:"-125px",top:0,marginLeft:"50%",marginTop:"20%"}} >
-              <button style={{width:"10%",height:"10%",backgroundColor:"red",color:"white",cursor: "pointer",border:"none"}} onClick={this.handleqr}>x</button>
+              <button style={{width:"15%",height:"35%",backgroundColor:"red",color:"white",cursor: "pointer",border:"none"}} onClick={this.handleqr}>x</button>
             <QrReader
              delay={300}
              onError={this.handleError}

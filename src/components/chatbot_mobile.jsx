@@ -226,13 +226,15 @@ class ChatbotMobile extends Component {
               </Box>
             </InputMessagesbox>    
               {this.state.showqr && <div id="qr" style={{position:"absolute",top:0,backgroundColor:'#6E6A5E70',width:"100%",height:"100%"}}>
-              <button style={{width:"10%",height:"10%",position:'absolute',backgroundColor:"red",color:"white",cursor: "pointer",border:"none"}} onClick={this.handleqr}>x</button>
+                <button style={{width:"10%",height:"5%",position:'absolute',backgroundColor:"red",color:"white",cursor: "pointer",border:"none",marginLeft:"10%",marginTop:"41%"}} onClick={this.handleqr}>x</button>
             <QrReader
               delay={300}
               onError={this.handleError}
               onScan={this.handleScan}
               style={{ width: '80%',margin:"10%" ,marginTop:"50%"}}
-            />
+            >
+
+            </QrReader>
             </div>
             }                  
         </div>     
