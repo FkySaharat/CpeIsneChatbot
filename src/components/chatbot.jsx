@@ -4,8 +4,7 @@ import Listmessages from './messages';
 import Api from '../api.json';
 //import bg from '../bgChatbot.png';
 import bgh from '../bg_test.png';
-
-
+import CropFreeIcon from '@material-ui/icons/CropFree';
 
 import {Button,Grid, Box,InputBase,ButtonGroup} from "@material-ui/core";
 import { styled } from '@material-ui/core/styles';
@@ -114,6 +113,7 @@ class Chatbot extends Component {
         }
         else{
          
+
           var room=["401","402"]
           let n=room.includes(para);
           if(n){
@@ -150,6 +150,7 @@ class Chatbot extends Component {
             })
           }
  
+
         }
       }
      
@@ -239,10 +240,10 @@ class Chatbot extends Component {
                 </Button> 
 
                 <Button variant="contained" color="primary"   onClick={()=>this.handleqr()} style={{width:"50px",height:"100%",margin:"1px"}}>
-                     qr
+                  <CropFreeIcon/>
                 </Button>
-                </ButtonGroup>
-
+                </ButtonGroup>          
+    
               </Box>
             </InputMessagesbox>  
             {this.state.showqr &&<div style={{position:"fixed",left:"-125px",top:0,marginLeft:"50%",marginTop:"20%"}}>
@@ -272,8 +273,10 @@ class Linkmessage extends React.Component {
     
     return (
       <div>
+
   <Button variant="outlined" size="small" color="primary" onClick = {() =>this.props.handler('Infomation '+this.props.value)}>Info{this.props.value}</Button>
         <Button variant="outlined" size="small" color="primary" onClick = {() =>this.props.handler('I am at '+this.props.value)}>Go to Other room</Button>
+
       </div>
     );
    
