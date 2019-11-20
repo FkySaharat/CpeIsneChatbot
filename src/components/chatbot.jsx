@@ -94,7 +94,7 @@ class Chatbot extends Component {
 
     //communicate to chatbot
     handlemessage(para){ 
-      console.log(this.state.InputMessage);
+      alert("old"+this.state.InputMessage);
       this.setState({InputMessage:''});
       var check=false;
       for(let i=0;i<para.length;i++){
@@ -116,7 +116,9 @@ class Chatbot extends Component {
         else{
          
 
-          var room=["401","402"]
+          var room=["401","402","403","404","405","406","407","409","410","411","412","413","414","415","417","419","420",
+          "421","422","423","424","427","428","501","502","503","504",'505','506','507','508','509','510',
+          '511','512','513','514','514','516','517','518','519','520','521','522','523','524','525','526','527','528','529','530','533','535']
           let n=room.includes(para);
           if(n){
             attr=[{mode:'client',time:0,type:'linkmessage',payload:para}];
@@ -165,18 +167,12 @@ class Chatbot extends Component {
     //Enter to send messages
     handleKeyPress = (event) => {
       if( event.key ==='Enter' && !event.shiftKey){
-        var newmessage=this.state.InputMessage.replace(/\n/g,"-");
-        alert(newmessage);
+        let oldmessage=this.state.InputMessage[0];
+        let newmessage=oldmessage.replace(/\n/g,"-");
         this.setState({InputMessage:newmessage});
+        alert("new:"+this.state.InputMessage);
         this.handlemessage(this.state.InputMessage);
       }
-      else if( event.key ==='Enter' && event.shiftKey){
-        var numberOfLineBreaks = (this.state.InputMessage.match(/\n/g)||[]).length;
-        alert('Number of breaks: ' + numberOfLineBreaks);
-        this.setState({InputMessage:this.state.InputMessage.replace(/\n/g," ")}); 
-
-      }
-
     }
 
   

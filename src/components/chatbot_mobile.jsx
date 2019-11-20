@@ -122,37 +122,44 @@ class ChatbotMobile extends Component {
         
         }
         else{
-          attr=[{mode:'client',time:0,type:'message',payload:para}];
-          this.handleAddmessage(attr);
-        
-          fetch(Api.Url+para+'&sessionId=2',{
-                method:'GET',
-                headers: new Headers({
-                        'Content-Type': 'application/json',
-                        'Authorization': Api.Authorization
-                })  
-          }).then((res) => {
-                return res.json(); 
-          }).then((data)=>{
-              var m =data.result.fulfillment.messages;
-              for(let i=0;i<m.length;i++){
-                if(m[i].speech){
-                  attr=[{mode:'bot',time:0,type:'message',payload:m[i].speech}];
-                  this.handleAddmessage(attr);
-                }
-              }
-              for(let i=0;i<m.length;i++){
-                if(m[i].imageUrl){
-                  attr=[{mode:'bot',time:0,type:'image',payload:m[i].imageUrl}];
-                  this.handleAddmessage(attr);
-                }
-              }
-            
-                          
-          }).catch((error) => {
-                attr=[{mode:'bot',time:0,type:'errormessage',payload:"System Error Please Try Again"}];
-                this.handleAddmessage(attr);
-          })
+          
+          var room=["401","402","403","404","405","406","407","409","410","411","412","413","414","415","417","419","420",
+          "421","422","423","424","427","428","501","502","503","504",'505','506','507','508','509','510',
+          '511','512','513','514','514','516','517','518','519','520','521','522','523','524','525','526','527','528','529','530','533','535']
+          let n=room.includes(para);
+          if(n){
+            attr=[{mode:'client',time:0,type:'linkmessage',payload:para}];
+            this.handleAddmessage(attr);
+          }
+          else{ 
+            attr=[{mode:'client',time:0,type:'message',payload:para}];
+            this.handleAddmessage(attr);
+            fetch(Api.Url+para+'&sessionId=2',{
+                            method:'GET',
+                            headers: new Headers({
+                                    'Content-Type': 'application/json',
+                                    'Authorization': Api.Authorization
+                            })  
+            }).then((res) => {return res.json(); 
+            }).then((data)=>{
+                          var m =data.result.fulfillment.messages;
+                          for(let i=0;i<m.length;i++){
+                            if(m[i].speech){
+                              attr=[{mode:'bot',time:0,type:'message',payload:m[i].speech}];
+                              this.handleAddmessage(attr);
+                            }
+                          }
+                          for(let i=0;i<m.length;i++){
+                            if(m[i].imageUrl){
+                              attr=[{mode:'bot',time:0,type:'image',payload:m[i].imageUrl}];
+                              this.handleAddmessage(attr);
+                            }
+                          }
+            }).catch((error) => {
+                            attr=[{mode:'bot',time:0,type:'errormessage',payload:"System Error Please Try Again"}];
+                            this.handleAddmessage(attr);
+            })
+          }
         }
       }
      
