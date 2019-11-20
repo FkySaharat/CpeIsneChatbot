@@ -94,6 +94,27 @@ function Rendermessage(params) {
             );
 
         }
+        else if(params.type==='linkmessage'){
+            return(
+                
+                <Box component="div">
+                    <Box color="error.main" border={1} borderColor="error.main"
+                    borderRadius={20} p="2px 8px" >
+                        <Typography component="div" style={{wordBreak:"break-word" }}>
+                        'Info of'{params.payload}    
+                        </Typography>
+                    </Box>
+                    <Box color="error.main" border={1} borderColor="error.main"
+                    borderRadius={20} p="2px 8px" >
+                        <Typography component="div" style={{wordBreak:"break-word" }}>
+                        'Go to other room'   
+                        </Typography>
+                    </Box>
+                </Box>
+              
+            );
+
+        }
         if(params.mode==="client"){
             return(
 
@@ -178,7 +199,7 @@ class ListMessages extends Component {
     render() { 
         
         const content =this.state.value;
-       
+    
         if(content.payload!=="" && content.payload!==" "){
             return(<Messagemode value={content} />); 
         }
