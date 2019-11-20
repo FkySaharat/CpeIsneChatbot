@@ -218,7 +218,7 @@ class Chatbot extends Component {
                       } 
                     })} 
               </ScrollToBottom>
-               <button onClick={this.ScrollToBottomm}>test</button> 
+              
               </div>
 
         
