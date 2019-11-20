@@ -24,15 +24,6 @@ const ROOT_CSS = css({
 
 
 
-const ShowMessagesbox = styled(Grid)({ 
-  background: '#eeeeee',
-  color: 'white',
-  height: '75vh',
-  width:'375px',
-  maxHeight:'500px',
-  padding: '15px 20px',
-
-});
 
 const InputMessagesbox = styled(Box)({ 
   minWidth:'360px',
@@ -72,12 +63,14 @@ const CssTextField = styled(InputBase)({
 });
 
 
+
 class Chatbot extends Component {
     state={
       count:0,
       messagebuffer:[{mode:'',time:0,type:'message',payload:"Hi,I'm CPEchatbot.How can I help you?"}],
       InputMessage:'',
-      showqr:false
+      showqr:false,
+      dataqr:''
     };
 
     constructor() {
@@ -101,6 +94,7 @@ class Chatbot extends Component {
 
     //communicate to chatbot
     handlemessage(para){ 
+      console.log("---",para);
       this.setState({InputMessage:''});
       var check=false;
       for(let i=0;i<para.length;i++){
@@ -123,7 +117,7 @@ class Chatbot extends Component {
           attr=[{mode:'client',time:0,type:'message',payload:para}];
           this.handleAddmessage(attr);
 
-          this.scrollToWithContainer()
+         
 
           fetch(Api.Url+para+'&sessionId=2',{
                 method:'GET',
@@ -149,7 +143,7 @@ class Chatbot extends Component {
               }
             
 
-                this.scrollToWithContainer()            
+                         
 
           }).catch((error) => {
                 attr=[{mode:'bot',time:0,type:'errormessage',payload:"System Error Please Try Again"}];
@@ -175,8 +169,10 @@ class Chatbot extends Component {
   
     handleScan = data => {
       if (data!=null) {
-        this.handlemessage(data); 
-        this.setState({showqr:false});
+        //this.handlemessage(data);
+        var attr=[{mode:'bot',time:0,type:'linkmessage',payload:data}];
+        this.handleAddmessage(attr); 
+        this.setState({showqr:false,dataqr:data});
       }
     }
     
@@ -192,7 +188,6 @@ class Chatbot extends Component {
     render() {
       /* const Messages=this.state.InputMessage; */
 
-    
       return (
         
         <Grid  container style={{position:"relative",height:'100vh',width:'100%',minWidth:"800px",backgroundImage:`url(${bgh})`,backgroundSize:"cover",backgroundPosition:"center center"}} direction="column"  alignItems="center">
@@ -202,13 +197,20 @@ class Chatbot extends Component {
               <ScrollToBottom item className={ ROOT_CSS } >
     
                   {this.state.messagebuffer.map(m=>{
-                    if(m!==this.state.messagebuffer[this.state.messagebuffer.length-1]){
+                    /* if(m!==this.state.messagebuffer[this.state.messagebuffer.length-1]){
 
                         return <div><Listmessages value={m}  /></div>
                       }
                       else{
                         console.log(m);
                         return <div ><Listmessages value={m} /></div>
+                      } */
+
+                      if(m.type!=='linkmessage'){
+                        return <div><Listmessages value={m}  /></div>
+                      }
+                      else{
+                        return <div><Linkmessage value={this.state.dataqr} handler = {this.handlemessage}/></div>
                       }
                     })}
               </ScrollToBottom>
@@ -233,14 +235,14 @@ class Chatbot extends Component {
 
               </Box>
             </InputMessagesbox>  
-            {this.state.showqr &&
+            {this.state.showqr &&<div style={{position:"fixed",left:"-125px",top:0,marginLeft:"50%",marginTop:"20%"}}>
             <QrReader
              delay={300}
              onError={this.handleError}
              onScan={this.handleScan}
-            style={{ width: '120px' }}
-            />
-            }}
+            style={{ width: '250px' }}
+            /></div>
+            }
             
 
         </Grid>
@@ -249,6 +251,21 @@ class Chatbot extends Component {
       );
     }
 
+}
+
+
+class Linkmessage extends React.Component {
+
+  render() {
+    
+    return (
+      <div>
+  <Button variant="outlined" size="small" color="primary" onClick = {() =>this.props.handler(this.props.value)}>Info{this.props.value}</Button>
+        <Button variant="outlined" size="small" color="primary" onClick = {() =>this.props.handler('I am at'+this.props.value)}>Go to Other room</Button>
+      </div>
+    );
+   
+  }
 }
 
 export default Chatbot;
