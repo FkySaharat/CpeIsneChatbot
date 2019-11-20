@@ -6,8 +6,9 @@ import Api from '../api.json';
 import bgh from '../Halloween.jpg';
 
 
-import {Button,Grid, Box,InputBase} from "@material-ui/core";
+import {Button,Grid, Box,InputBase, ButtonGroup} from "@material-ui/core";
 import { styled } from '@material-ui/core/styles';
+import QrReader from 'react-qr-reader';
 
 import ScrollToBottom from 'react-scroll-to-bottom';
 
@@ -94,6 +95,22 @@ class ChatbotMobile extends Component {
     handleAddmessage(event){
      this.state.messagebuffer.push(event[0]);
      this.setState({some:event[0],messagebuffer:this.state.messagebuffer});
+    }
+
+    handleScan = data => {
+      if (data!=null) {
+        this.handlemessage(data); 
+        this.setState({showqr:false});
+      }
+    }
+    
+    handleqr = data => {
+      
+      this.setState({showqr:!this.state.showqr});
+    }
+
+    handleError = err => {
+      console.error(err)
     }
 
     //communicate to chatbot
@@ -195,12 +212,28 @@ class ChatbotMobile extends Component {
               </Box>
               
               <Box  component="div" style={{marginLeft:'2px'}} >
+              <ButtonGroup aria-label="small outlined button group">
                 <Button variant="contained" color="primary"   onClick={()=>this.handlemessage(this.state.InputMessage)} style={{width:"50px",height:"100%",margin:"1px"}}>
                      send
                 </Button> 
+
+                <Button variant="contained" color="primary"   onClick={()=>this.handleqr()} style={{width:"50px",height:"100%",margin:"1px"}}>
+                     qr
+                </Button>
+                </ButtonGroup>
+                
                
               </Box>
             </InputMessagesbox>  
+
+            {this.state.showqr &&
+            <QrReader
+             delay={300}
+             onError={this.handleError}
+             onScan={this.handleScan}
+            style={{ width: '120px' }}
+            />
+            }
            
             
                         

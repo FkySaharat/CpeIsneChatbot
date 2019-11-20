@@ -3,7 +3,7 @@ import React, {Component } from "react";
 import Listmessages from './messages';
 import Api from '../api.json';
 //import bg from '../bgChatbot.png';
-import bgh from '../Halloween.jpg';
+import bgh from '../bg_test.png';
 
 
 
