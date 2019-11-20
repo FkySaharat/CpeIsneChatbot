@@ -41,7 +41,11 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    
+
+    <div id="m" style="position: absolute; top:0; left:0; width:100%; height: 100%;  display: none; background:url('') ;" >
+      <button onclick="myFunction()" style="position:fixed; top:10%; right:10%;">x</button>
+      <img id="mmm" src="">
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -52,5 +56,10 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+      function myFunction() {
+        document.getElementById("m").style.display = "none";
+      }
+      </script>
   </body>
 </html>

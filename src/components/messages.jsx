@@ -28,20 +28,18 @@ class Renderimage extends Component {
         this.state = {
         params:this.props.value,
         showComponent:false
-      }
+        }
           this.onButtonClick=this.onButtonClick.bind(this);
       }
         
      onButtonClick() {
-         if(this.state.showComponent===true){
-                this.setState({
-                     showComponent: false,
-                });
-         }else{
-            this.setState({
-                showComponent: true,
-           });
-         }
+         var test=document.getElementById('m');
+         var test2=document.getElementById('mmm');
+    
+         test2.src=this.state.params;
+       
+         test.style.display="block";
+        
        
       } 
     render(){
@@ -54,15 +52,7 @@ class Renderimage extends Component {
                             <Button size="small" color="primary" onClick={this.onButtonClick}>Expand</Button>
                         </CardActions>
                     </Card>
-                    {this.state.showComponent ?
-                        <Box width={1} style={{position:"absolute",left:"0",right:"0",top:"0",bottom:"0"}} zIndex="tooltip">
-                            
-                       <ButtonBase  onClick={this.onButtonClick}>
-                          <span><CardMedia component="img" alt=""  image={this.state.params} /></span>  
-                       </ButtonBase>
-
-                        </Box> : null
-                    }
+                    
                </Box>); 
         }
 }
