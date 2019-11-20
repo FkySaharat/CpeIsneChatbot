@@ -5,7 +5,6 @@ import Avatar from '@material-ui/core/Avatar';
 import cpe from '../cpe.png';
 import { Grid } from '@material-ui/core';
 import GoogleMapIcon from '../google-maps.png';
-import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles(theme => ({
@@ -121,18 +120,18 @@ function Webfooter() {
                 239, Huay Kaew Road, Muang District, <br/>
                 Chiang Mai Thailand, 50200
             </Typography>  
-                       
+
             <Grid container display='flex' flexDirection='row' >
-              <a href="https://www.google.co.th/maps/place/คณะวิศวกรรมศาสตร์+มหาวิทยาลัยเชียงใหม่/@18.7956724,98.9506894,17z/data=!4m5!3m4!1s0x30da3a6e0d8891c9:0x2c728e2876b2505c!8m2!3d18.7956866!4d98.9528731?hl=th">
-                <Avatar className={classes.avatar} src={GoogleMapIcon} display='flex' flexDirection='row' title='Go to Google Map'></Avatar>
-              </a>
-
-              <a href='https://cpe.eng.cmu.ac.th/2013/index.php'>
-                <Avatar  src={cpe} className={classes.avatar} display='flex'  flexDirection='row' title='Go to CPE website'></Avatar>
-              </a>
-                
-                
-
+              <Tooltip title='Go to Google Map' placement="right-start">
+                <a href="https://www.google.co.th/maps/place/คณะวิศวกรรมศาสตร์+มหาวิทยาลัยเชียงใหม่/@18.7956724,98.9506894,17z/data=!4m5!3m4!1s0x30da3a6e0d8891c9:0x2c728e2876b2505c!8m2!3d18.7956866!4d98.9528731?hl=th">
+                  <Avatar className={classes.avatar} src={GoogleMapIcon} display='flex' flexDirection='row' ></Avatar>
+                </a>
+              </Tooltip>   
+              <Tooltip title='Go to CPE website' placement="right-start">
+                <a href='https://cpe.eng.cmu.ac.th/2013/index.php'>
+                  <Avatar  src={cpe} className={classes.avatar} display='flex'  flexDirection='row' ></Avatar>
+                </a>
+              </Tooltip>     
             </Grid>    
            
 
