@@ -4,13 +4,14 @@ import Listmessages from './messages';
 import Api from '../api.json';
 import bg from '../bgChatbot.png';
 import bgh from '../bgnew.png';
+
 import CropFreeIcon from '@material-ui/icons/CropFree';
 
 
 import {Button,Tooltip,Grid, Box,InputBase,ButtonGroup, Typography} from "@material-ui/core";
 import { styled } from '@material-ui/core/styles';
-import QrReader from 'react-qr-reader';
 
+import QrReader from 'react-qr-reader';
 import ScrollToBottom from 'react-scroll-to-bottom';
 
 ////speech to text
@@ -20,9 +21,6 @@ const ROOT_CSS = css({
   width: 360,
   paddingLeft: '10px'
 });
-
-
-
 
 
 const InputMessagesbox = styled(Box)({ 
@@ -115,7 +113,7 @@ class Chatbot extends Component {
         else{
          
 
-          var room=["401","402"]
+          var room=["401","402","403","404","405","406","407","409","410","411","412","413","414","415","501","502","503","504","505","508","509","510","514","515","516","517","518","519","520","521"]
           let n=room.includes(para);
           if(n){
             attr=[{mode:'client',time:0,type:'linkmessage',payload:para}];
@@ -165,6 +163,7 @@ class Chatbot extends Component {
     handleKeyPress = (event) => {
       if( event.key ==='Enter' && !event.shiftKey){
         this.handlemessage(this.state.InputMessage);
+        
       }
 
     }
@@ -200,7 +199,7 @@ class Chatbot extends Component {
               <ScrollToBottom item className={ ROOT_CSS } >
     
                   {this.state.messagebuffer.map(m=>{
-                    /* if(m!==this.state.messagebuffer[this.state.messagebuffer.length-1]){
+                     /*if(m!==this.state.messagebuffer[this.state.messagebuffer.length-1]){
 
                         return <div><Listmessages value={m}  /></div>
                       }
@@ -220,7 +219,7 @@ class Chatbot extends Component {
                         else{
                           mes=m.payload;
                         }
-                        return <div><Linkmessage value={mes} handler = {this.handlemessage}/></div>
+                        return <div ><Linkmessage value={mes} handler = {this.handlemessage}/></div>
                       }
                     })}
               </ScrollToBottom>
@@ -253,9 +252,7 @@ class Chatbot extends Component {
             <QrReader
              delay={300}
              onError={this.handleError}
-             onScan={this.handleScan}
-             
-            
+             onScan={this.handleScan} 
             style={{ width: '250px' }}
             /></div>
 
