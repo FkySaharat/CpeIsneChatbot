@@ -102,6 +102,7 @@ class ChatbotMobile extends Component {
         this.handlemessage(data); 
         this.setState({showqr:false});
       }
+      
     }
     
     handleqr = data => {
