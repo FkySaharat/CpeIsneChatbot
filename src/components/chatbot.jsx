@@ -7,7 +7,7 @@ import bgh from '../bgnew.png';
 import CropFreeIcon from '@material-ui/icons/CropFree';
 
 
-import {Button,Tooltip,Grid, Box,InputBase,ButtonGroup, Typography} from "@material-ui/core";
+import {Button,Tooltip,Grid, Box,InputBase,ButtonGroup, Typography,TextField} from "@material-ui/core";
 import { styled } from '@material-ui/core/styles';
 import QrReader from 'react-qr-reader';
 
@@ -94,6 +94,7 @@ class Chatbot extends Component {
 
     //communicate to chatbot
     handlemessage(para){ 
+      console.log(this.state.InputMessage);
       this.setState({InputMessage:''});
       var check=false;
       for(let i=0;i<para.length;i++){
@@ -164,7 +165,16 @@ class Chatbot extends Component {
     //Enter to send messages
     handleKeyPress = (event) => {
       if( event.key ==='Enter' && !event.shiftKey){
+        var newmessage=this.state.InputMessage.replace(/\n/g,"-");
+        alert(newmessage);
+        this.setState({InputMessage:newmessage});
         this.handlemessage(this.state.InputMessage);
+
+      else  if( event.key ==='Enter' && event.shiftKey){
+        var numberOfLineBreaks = (this.state.InputMessage.match(/\n/g)||[]).length;
+        alert('Number of breaks: ' + numberOfLineBreaks);
+        this.setState({InputMessage:this.state.InputMessage.replace(/\n/g," ")}); 
+
       }
 
     }

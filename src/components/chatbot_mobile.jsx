@@ -244,4 +244,18 @@ class ChatbotMobile extends Component {
 }
 
 
+
+  render() {
+    
+    return (
+      <div>
+        <Typography style={{fontSize:"14px",color:"#605C4E",margin:"5px"}}>Please let us know what you want.</Typography>
+        <Button style={{marginRight:"5px"}} variant="outlined" size="small" color="primary" onClick = {() =>this.props.handler('Infomation '+this.props.value)}>Info{this.props.value}</Button>
+        <Button variant="outlined" size="small" color="primary" onClick = {() =>this.props.handler('I am at '+this.props.value)}>Go to Other room</Button>
+
+      </div>
+    );
+  }
+}
+
 export default ChatbotMobile;
