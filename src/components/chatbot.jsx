@@ -2,8 +2,7 @@
 import React, {Component } from "react";
 import Listmessages from './messages';
 import Api from '../api.json';
-
-
+import bg from '../bgChatbot.png';
 import CropFreeIcon from '@material-ui/icons/CropFree';
 
 
@@ -11,8 +10,8 @@ import {Button,Tooltip,Grid, Box,InputBase,ButtonGroup, Typography} from "@mater
 import { styled } from '@material-ui/core/styles';
 
 import QrReader from 'react-qr-reader';
-import ScrollToBottom from 'react-scroll-to-bottom';
 
+import ScrollToBottom from 'react-scroll-to-bottom';
 ////speech to text
 import { css } from 'glamor';
 const ROOT_CSS = css({
@@ -80,7 +79,7 @@ class Chatbot extends Component {
         this.handlemessage=this.handlemessage.bind(this);     
     }
 
-   
+    
     handleChange = event => {
       const {name, value} = event.currentTarget;
       this.setState({[name]: value});
@@ -180,7 +179,7 @@ class Chatbot extends Component {
       }
     }
     
-    handleqr = data => {
+    handleqr=()=> {
       
       this.setState({showqr:!this.state.showqr});
     }
@@ -189,26 +188,20 @@ class Chatbot extends Component {
       console.error(err)
     }
 
+    
+    
+    
     render() {
-      /* const Messages=this.state.InputMessage; */
-
+     
       return (
         
-        <Grid  container style={{position:"relative",height:'100vh',width:'100%',minWidth:"768px"/*,backgroundImage:`url(${bgh})`*/,backgroundSize:"cover",backgroundPosition:"center center"}} direction="column"  alignItems="center">
+        <Grid  container style={{position:"relative",height:'100vh',width:'100%',minWidth:"768px",backgroundImage:`url(${bg})`,backgroundSize:"cover",backgroundPosition:"center center"}} direction="column"  alignItems="center">
 
               <div style={{width:'376px',backgroundColor:'lightyellow  ', marginTop: '63px',}}> 
 
               <ScrollToBottom item className={ ROOT_CSS } >
-    
-                  {this.state.messagebuffer.map(m=>{
-                     /*if(m!==this.state.messagebuffer[this.state.messagebuffer.length-1]){
-
-                        return <div><Listmessages value={m}  /></div>
-                      }
-                      else{
-                        console.log(m);
-                        return <div ><Listmessages value={m} /></div>
-                      } */
+                
+                   {this.state.messagebuffer.map(m=>{
 
                       if(m.type!=='linkmessage'){
                         return <div><Listmessages value={m}  /></div>
@@ -222,9 +215,10 @@ class Chatbot extends Component {
                           mes=m.payload;
                         }
                         return <div ><Linkmessage value={mes} handler = {this.handlemessage}/></div>
-                      }
-                    })}
+                      } 
+                    })} 
               </ScrollToBottom>
+               <button onClick={this.ScrollToBottomm}>test</button> 
               </div>
 
         
@@ -250,7 +244,8 @@ class Chatbot extends Component {
     
               </Box>
             </InputMessagesbox>  
-            {this.state.showqr &&<div style={{position:"fixed",left:"-125px",top:0,marginLeft:"50%",marginTop:"20%"}}>
+            {this.state.showqr &&<div id="qr" style={{position:"fixed",left:"-125px",top:0,marginLeft:"50%",marginTop:"20%"}} >
+              <button onClick={this.handleqr}>x</button>
             <QrReader
              delay={300}
              onError={this.handleError}
@@ -287,4 +282,6 @@ class Linkmessage extends React.Component {
 }
 
 
+
 export default Chatbot;
+
