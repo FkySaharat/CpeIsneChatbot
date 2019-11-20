@@ -195,7 +195,7 @@ class Chatbot extends Component {
     
       return (
         
-        <Grid  container style={{position:"relative",height:'100vh',width:'100%',minWidth:"768px",backgroundImage:`url(${bgh})`,backgroundSize:"cover",backgroundPosition:"center center"}} direction="column"  alignItems="center">
+        <Grid  container style={{position:"relative",height:'100vh',width:'100%',minWidth:"768px"/*,backgroundImage:`url(${bgh})`*/,backgroundSize:"cover",backgroundPosition:"center center"}} direction="column"  alignItems="center">
 
               <div style={{width:'376px',backgroundColor:'lightyellow  ', marginTop: '63px',}}> 
 

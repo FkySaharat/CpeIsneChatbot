@@ -225,14 +225,16 @@ class ChatbotMobile extends Component {
                
               </Box>
             </InputMessagesbox>  
-
+                  
             {this.state.showqr &&
+            <div style={{width:"80%", height:"80%", backgroundColor:"#bbbbbb"  }}>
             <QrReader
              delay={300}
              onError={this.handleError}
              onScan={this.handleScan}
-            style={{ width: '120px' }}
+            style={{ width: '80%' }}
             />
+            </div>
             }
            
             
