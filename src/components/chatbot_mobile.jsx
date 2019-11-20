@@ -124,37 +124,42 @@ class ChatbotMobile extends Component {
         
         }
         else{
-          attr=[{mode:'client',time:0,type:'message',payload:para}];
-          this.handleAddmessage(attr);
-        
-          fetch(Api.Url+para+'&sessionId=2',{
-                method:'GET',
-                headers: new Headers({
-                        'Content-Type': 'application/json',
-                        'Authorization': Api.Authorization
-                })  
-          }).then((res) => {
-                return res.json(); 
-          }).then((data)=>{
-              var m =data.result.fulfillment.messages;
-              for(let i=0;i<m.length;i++){
-                if(m[i].speech){
-                  attr=[{mode:'bot',time:0,type:'message',payload:m[i].speech}];
-                  this.handleAddmessage(attr);
-                }
-              }
-              for(let i=0;i<m.length;i++){
-                if(m[i].imageUrl){
-                  attr=[{mode:'bot',time:0,type:'image',payload:m[i].imageUrl}];
-                  this.handleAddmessage(attr);
-                }
-              }
-            
-                          
-          }).catch((error) => {
-                attr=[{mode:'bot',time:0,type:'errormessage',payload:"System Error Please Try Again"}];
-                this.handleAddmessage(attr);
-          })
+          
+          var room=["401","402"]
+          let n=room.includes(para);
+          if(n){
+            attr=[{mode:'client',time:0,type:'linkmessage',payload:para}];
+            this.handleAddmessage(attr);
+          }
+          else{ 
+            attr=[{mode:'client',time:0,type:'message',payload:para}];
+            this.handleAddmessage(attr);
+            fetch(Api.Url+para+'&sessionId=2',{
+                            method:'GET',
+                            headers: new Headers({
+                                    'Content-Type': 'application/json',
+                                    'Authorization': Api.Authorization
+                            })  
+            }).then((res) => {return res.json(); 
+            }).then((data)=>{
+                          var m =data.result.fulfillment.messages;
+                          for(let i=0;i<m.length;i++){
+                            if(m[i].speech){
+                              attr=[{mode:'bot',time:0,type:'message',payload:m[i].speech}];
+                              this.handleAddmessage(attr);
+                            }
+                          }
+                          for(let i=0;i<m.length;i++){
+                            if(m[i].imageUrl){
+                              attr=[{mode:'bot',time:0,type:'image',payload:m[i].imageUrl}];
+                              this.handleAddmessage(attr);
+                            }
+                          }
+            }).catch((error) => {
+                            attr=[{mode:'bot',time:0,type:'errormessage',payload:"System Error Please Try Again"}];
+                            this.handleAddmessage(attr);
+            })
+          }
         }
       }
      
