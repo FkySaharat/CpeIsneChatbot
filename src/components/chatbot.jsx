@@ -2,15 +2,15 @@
 import React, {Component } from "react";
 import Listmessages from './messages';
 import Api from '../api.json';
-//import bg from '../bgChatbot.png';
-import bgh from '../bg_test.png';
+
+
 import CropFreeIcon from '@material-ui/icons/CropFree';
 
 
 import {Button,Tooltip,Grid, Box,InputBase,ButtonGroup, Typography} from "@material-ui/core";
 import { styled } from '@material-ui/core/styles';
-import QrReader from 'react-qr-reader';
 
+import QrReader from 'react-qr-reader';
 import ScrollToBottom from 'react-scroll-to-bottom';
 
 ////speech to text
@@ -165,6 +165,7 @@ class Chatbot extends Component {
     handleKeyPress = (event) => {
       if( event.key ==='Enter' && !event.shiftKey){
         this.handlemessage(this.state.InputMessage);
+        
       }
 
     }
@@ -200,7 +201,7 @@ class Chatbot extends Component {
               <ScrollToBottom item className={ ROOT_CSS } >
     
                   {this.state.messagebuffer.map(m=>{
-                    /* if(m!==this.state.messagebuffer[this.state.messagebuffer.length-1]){
+                     /*if(m!==this.state.messagebuffer[this.state.messagebuffer.length-1]){
 
                         return <div><Listmessages value={m}  /></div>
                       }
@@ -220,7 +221,7 @@ class Chatbot extends Component {
                         else{
                           mes=m.payload;
                         }
-                        return <div><Linkmessage value={mes} handler = {this.handlemessage}/></div>
+                        return <div ><Linkmessage value={mes} handler = {this.handlemessage}/></div>
                       }
                     })}
               </ScrollToBottom>
@@ -253,9 +254,7 @@ class Chatbot extends Component {
             <QrReader
              delay={300}
              onError={this.handleError}
-             onScan={this.handleScan}
-             
-            
+             onScan={this.handleScan} 
             style={{ width: '250px' }}
             /></div>
 
