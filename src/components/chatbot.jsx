@@ -4,7 +4,7 @@ import Listmessages from './messages';
 import Api from '../api.json';
 //import bg from '../bgChatbot.png';
 import bgh from '../Halloween.jpg';
-
+import AdbIcon from '@material-ui/icons/Adb';
 
 
 import {Button,Grid, Box,InputBase} from "@material-ui/core";
@@ -94,7 +94,6 @@ class Chatbot extends Component {
 
     //communicate to chatbot
     handlemessage(para){ 
-      console.log("---",para);
       this.setState({InputMessage:''});
       var check=false;
       for(let i=0;i<para.length;i++){
@@ -114,41 +113,43 @@ class Chatbot extends Component {
 
         }
         else{
-          attr=[{mode:'client',time:0,type:'message',payload:para}];
-          this.handleAddmessage(attr);
-
          
-
-          fetch(Api.Url+para+'&sessionId=2',{
-                method:'GET',
-                headers: new Headers({
-                        'Content-Type': 'application/json',
-                        'Authorization': Api.Authorization
-                })  
-          }).then((res) => {
-                return res.json(); 
-          }).then((data)=>{
-              var m =data.result.fulfillment.messages;
-              for(let i=0;i<m.length;i++){
-                if(m[i].speech){
-                  attr=[{mode:'bot',time:0,type:'message',payload:m[i].speech}];
-                  this.handleAddmessage(attr);
-                }
-              }
-              for(let i=0;i<m.length;i++){
-                if(m[i].imageUrl){
-                  attr=[{mode:'bot',time:0,type:'image',payload:m[i].imageUrl}];
-                  this.handleAddmessage(attr);
-                }
-              }
-            
-
-                         
-
-          }).catch((error) => {
-                attr=[{mode:'bot',time:0,type:'errormessage',payload:"System Error Please Try Again"}];
-                this.handleAddmessage(attr);
-          })
+          var room=["401","402"]
+          let n=room.includes(para);
+          if(n){
+            attr=[{mode:'client',time:0,type:'linkmessage',payload:para}];
+            this.handleAddmessage(attr);
+          }
+          else{ 
+            attr=[{mode:'client',time:0,type:'message',payload:para}];
+            this.handleAddmessage(attr);
+            fetch(Api.Url+para+'&sessionId=2',{
+                            method:'GET',
+                            headers: new Headers({
+                                    'Content-Type': 'application/json',
+                                    'Authorization': Api.Authorization
+                            })  
+            }).then((res) => {return res.json(); 
+            }).then((data)=>{
+                          var m =data.result.fulfillment.messages;
+                          for(let i=0;i<m.length;i++){
+                            if(m[i].speech){
+                              attr=[{mode:'bot',time:0,type:'message',payload:m[i].speech}];
+                              this.handleAddmessage(attr);
+                            }
+                          }
+                          for(let i=0;i<m.length;i++){
+                            if(m[i].imageUrl){
+                              attr=[{mode:'bot',time:0,type:'image',payload:m[i].imageUrl}];
+                              this.handleAddmessage(attr);
+                            }
+                          }
+            }).catch((error) => {
+                            attr=[{mode:'bot',time:0,type:'errormessage',payload:"System Error Please Try Again"}];
+                            this.handleAddmessage(attr);
+            })
+          }
+ 
         }
       }
      
@@ -210,7 +211,14 @@ class Chatbot extends Component {
                         return <div><Listmessages value={m}  /></div>
                       }
                       else{
-                        return <div><Linkmessage value={this.state.dataqr} handler = {this.handlemessage}/></div>
+                        var mes="";
+                        if(this.state.dataqr){
+                          mes=this.state.dataqr;
+                        }
+                        else{
+                          mes=m.payload;
+                        }
+                        return <div><Linkmessage value={mes} handler = {this.handlemessage}/></div>
                       }
                     })}
               </ScrollToBottom>
@@ -230,7 +238,7 @@ class Chatbot extends Component {
                 </Button> 
 
                 <Button variant="contained" color="primary"   onClick={()=>this.handleqr()} style={{width:"50px",height:"100%",margin:"1px"}}>
-                     qr
+                     <AdbIcon/>
                 </Button>
 
               </Box>
@@ -260,8 +268,8 @@ class Linkmessage extends React.Component {
     
     return (
       <div>
-  <Button variant="outlined" size="small" color="primary" onClick = {() =>this.props.handler(this.props.value)}>Info{this.props.value}</Button>
-        <Button variant="outlined" size="small" color="primary" onClick = {() =>this.props.handler('I am at'+this.props.value)}>Go to Other room</Button>
+  <Button variant="outlined" size="small" color="primary" onClick = {() =>this.props.handler('Infomation '+this.props.value)}>Info{this.props.value}</Button>
+        <Button variant="outlined" size="small" color="primary" onClick = {() =>this.props.handler('I am at '+this.props.value)}>Go to Other room</Button>
       </div>
     );
    
