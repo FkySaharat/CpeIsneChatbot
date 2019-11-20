@@ -123,7 +123,7 @@ class Chatbot extends Component {
           attr=[{mode:'client',time:0,type:'message',payload:para}];
           this.handleAddmessage(attr);
 
-          this.scrollToWithContainer()
+         
 
           fetch(Api.Url+para+'&sessionId=2',{
                 method:'GET',
@@ -147,9 +147,7 @@ class Chatbot extends Component {
                   this.handleAddmessage(attr);
                 }
               }
-            
-
-                this.scrollToWithContainer()            
+                      
 
           }).catch((error) => {
                 attr=[{mode:'bot',time:0,type:'errormessage',payload:"System Error Please Try Again"}];
@@ -242,7 +240,7 @@ class Chatbot extends Component {
              onScan={this.handleScan}
             style={{ width: '120px' }}
             />
-            }}
+            }
             
 
         </Grid>
