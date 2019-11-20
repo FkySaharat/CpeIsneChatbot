@@ -32,13 +32,12 @@ const useStyles = makeStyles(theme => ({
     
   }, 
   footer: {
-
-    //padding: theme.spacing(2),
+   
     marginTop: 'auto',
     backgroundColor: '#212121',
     minWidth:"375px",
     top: "2000px",
-    width:"100%",
+    
   },
  
   avatar: {
@@ -62,6 +61,7 @@ const useStyles = makeStyles(theme => ({
     fontFamily:"Roboto",
     marginTop:'50px',
     marginBottom:'10px',
+
   },
   con:{
     color:'#666970',
@@ -84,9 +84,7 @@ function Webfooter() {
 
   return (
     <div >
-
-      <Grid container  className={classes.names} >
-
+      <Grid container  className={classes.names}>
           <Grid  item s={6} className={classes.names} >
               <div>
                   <Typography variant="h4" className={classes.paper}>
@@ -143,7 +141,7 @@ function Webfooter() {
 }
 
 
-export default function Footer() {
+export default function FooterMobile() {
   const classes = useStyles();
 
   return (
