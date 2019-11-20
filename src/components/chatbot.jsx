@@ -116,7 +116,7 @@ class Chatbot extends Component {
         else{
          
 
-          var room=["401","402","403","404","405","406","407","409","410","411","412","413","414","415","417","419","420",
+          var room=["Scan401","Scan402","Scan403","Scan404","Scan405","406","407","409","410","411","412","413","414","415","417","419","420",
           "421","422","423","424","427","428","501","502","503","504",'505','506','507','508','509','510',
           '511','512','513','514','514','516','517','518','519','520','521','522','523','524','525','526','527','528','529','530','533','535']
           let n=room.includes(para);
@@ -248,7 +248,7 @@ class Chatbot extends Component {
               </Box>
             </InputMessagesbox>  
             {this.state.showqr &&<div id="qr" style={{position:"fixed",left:"-125px",top:0,marginLeft:"50%",marginTop:"20%"}} >
-              <button style={{width:"15%",height:"35%",backgroundColor:"red",color:"white",cursor: "pointer",border:"none"}} onClick={this.handleqr}>x</button>
+            <button  style={{width:"15%",height:"35%",backgroundColor:"red",color:"white",cursor: "pointer",border:"none"}} onClick={this.handleqr}>x</button> 
             <QrReader
              delay={300}
              onError={this.handleError}

@@ -232,7 +232,7 @@ class ChatbotMobile extends Component {
 
                 
             {this.state.showqr && <div style={{position:"fixed",top:0,backgroundColor:'#6E6A5E70',width:"100%",height:"100%"}}>
-            <button style={{width:"15%",height:"35%",backgroundColor:"red",color:"white",cursor: "pointer",border:"none"}} onClick={this.handleqr}>x</button>
+            <button style={{position:"absolute", marginLeft:"10%",marginTop:"41%",width:"15%",height:"5%",backgroundColor:"red",color:"white",border:"none"}} onClick={this.handleqr}>x</button>
             <QrReader
              delay={300}
              onError={this.handleError}
