@@ -3,6 +3,10 @@ import React, {Component } from "react";
 import Listmessages from './messages';
 import Api from '../api.json';
 import bg from '../bgChatbot.png';
+
+import bgh from '../bgnew.png';
+
+
 import CropFreeIcon from '@material-ui/icons/CropFree';
 
 
@@ -19,9 +23,6 @@ const ROOT_CSS = css({
   width: 360,
   paddingLeft: '10px'
 });
-
-
-
 
 
 const InputMessagesbox = styled(Box)({ 
@@ -114,7 +115,7 @@ class Chatbot extends Component {
         else{
          
 
-          var room=["401","402"]
+          var room=["401","402","403","404","405","406","407","409","410","411","412","413","414","415","501","502","503","504","505","508","509","510","514","515","516","517","518","519","520","521"]
           let n=room.includes(para);
           if(n){
             attr=[{mode:'client',time:0,type:'linkmessage',payload:para}];
@@ -195,7 +196,9 @@ class Chatbot extends Component {
      
       return (
         
-        <Grid  container style={{position:"relative",height:'100vh',width:'100%',minWidth:"768px",backgroundImage:`url(${bg})`,backgroundSize:"cover",backgroundPosition:"center center"}} direction="column"  alignItems="center">
+
+        <Grid  container style={{position:"relative",height:'100vh',width:'100%',minWidth:"768px",backgroundImage:`url(${bgh})`,backgroundSize:"cover",backgroundPosition:"center center"}} direction="column"  alignItems="center">
+
 
               <div style={{width:'376px',backgroundColor:'lightyellow  ', marginTop: '63px',}}> 
 

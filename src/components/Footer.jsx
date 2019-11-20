@@ -64,7 +64,7 @@ const useStyles = makeStyles(theme => ({
   },
   con:{
     color:'#666970',
-    marginRight:'20px',
+   
     fontFamily:"Roboto",
   },
   names:{
