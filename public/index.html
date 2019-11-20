@@ -41,20 +41,34 @@
       height: auto;
       display: block;
      }
-
+     .button{
+      position:absolute;
+      top:11%; 
+      right:10%;
+      cursor: pointer;
+      border: none;
+      transition-duration: 0.4s;
+      background-color: red;
+      color: white;
+      width: 10%;
+      height: 5%;
+      font-size: medium;
+     }
+     
      @media only screen and (min-device-width: 415px) {
       img { 
         margin-left: auto;
         margin-right: auto;
-        margin-top: 5%;
+        
         width: auto;
         height: 70%;
         display: block;
       }
+      .button{
+        width: 2.5%;
+        height: 5%;
+      }
     }
-
-
-
 
      #m{
       position: absolute; 
@@ -62,23 +76,9 @@
       width:100%; height: 100%;  
       display: none; background:url('') ;
       background-color:rgb(0, 0, 0,.9);
-      
+     
      }
-     .button{
-      position:absolute;
-      top:10%; 
-      right:10%;
-      cursor: pointer;
-      border: none;
-      transition-duration: 0.4s;
-      background-color: black;
-      color: white;
-     }
-     .button:hover{
-      color: white;
-      background-color: red;
-      
-     }
+     
 
      
    </style>
@@ -105,6 +105,16 @@
     <script>
       function myFunction() {
         document.getElementById("m").style.display = "none";
+      }
+      
+      function size(){
+        ;
+        if(window.innerWidth<500){
+          document.getElementById("mmm").style.with="100px";
+        }
+        else{
+          document.getElementById("mmm").style.with="200px";
+        }
       }
       </script>
   </body>
