@@ -114,7 +114,7 @@ class Chatbot extends Component {
         else{
          
 
-          var room=["401","402"]
+          var room=["401","402","403","404","405","406","407","409","410","411","412","413","414","415","501","502","503","504","505","508","509","510","514","515","516","517","518","519","520","521"]
           let n=room.includes(para);
           if(n){
             attr=[{mode:'client',time:0,type:'linkmessage',payload:para}];
