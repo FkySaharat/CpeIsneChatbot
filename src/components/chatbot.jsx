@@ -169,8 +169,8 @@ class Chatbot extends Component {
         alert(newmessage);
         this.setState({InputMessage:newmessage});
         this.handlemessage(this.state.InputMessage);
-
-      else  if( event.key ==='Enter' && event.shiftKey){
+      }
+      else if( event.key ==='Enter' && event.shiftKey){
         var numberOfLineBreaks = (this.state.InputMessage.match(/\n/g)||[]).length;
         alert('Number of breaks: ' + numberOfLineBreaks);
         this.setState({InputMessage:this.state.InputMessage.replace(/\n/g," ")}); 

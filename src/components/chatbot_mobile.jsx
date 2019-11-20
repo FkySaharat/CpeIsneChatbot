@@ -6,7 +6,7 @@ import Api from '../api.json';
 import bgh from '../Halloween.jpg';
 
 
-import {Button,Grid, Box,InputBase, ButtonGroup} from "@material-ui/core";
+import {Button,Grid, Box,InputBase, ButtonGroup,Typography} from "@material-ui/core";
 import { styled } from '@material-ui/core/styles';
 import QrReader from 'react-qr-reader';
 
@@ -241,7 +241,7 @@ class ChatbotMobile extends Component {
       );
     }
 
-}
+
 
 
 
@@ -255,7 +255,7 @@ class ChatbotMobile extends Component {
 
       </div>
     );
-  }
+    }
 }
 
 export default ChatbotMobile;
