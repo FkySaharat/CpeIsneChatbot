@@ -2,8 +2,8 @@
 import React, {Component } from "react";
 import Listmessages from './messages';
 import Api from '../api.json';
-//import bg from '../bgChatbot.png';
-import bgh from '../bg_test.png';
+import bg from '../bgChatbot.png';
+import bgh from '../bgnew.png';
 import CropFreeIcon from '@material-ui/icons/CropFree';
 
 
@@ -193,7 +193,7 @@ class Chatbot extends Component {
 
       return (
         
-        <Grid  container style={{position:"relative",height:'100vh',width:'100%',minWidth:"768px"/*,backgroundImage:`url(${bgh})`*/,backgroundSize:"cover",backgroundPosition:"center center"}} direction="column"  alignItems="center">
+        <Grid  container style={{position:"relative",height:'100vh',width:'100%',minWidth:"768px",backgroundImage:`url(${bgh})`,backgroundSize:"cover",backgroundPosition:"center center"}} direction="column"  alignItems="center">
 
               <div style={{width:'376px',backgroundColor:'lightyellow  ', marginTop: '63px',}}> 
 
