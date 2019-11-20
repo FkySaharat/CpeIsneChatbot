@@ -44,7 +44,7 @@
      .button{
       position:absolute;
       top:11%; 
-      right:10%;
+      right:0%;
       cursor: pointer;
       border: none;
       transition-duration: 0.4s;
@@ -54,7 +54,7 @@
       height: 5%;
       font-size: medium;
 
-      
+
      }
      
      @media only screen and (min-device-width: 415px) {
@@ -62,18 +62,20 @@
         margin-left: auto;
         margin-right: auto;
         margin-top: 10%;
-        width: auto;
-        height: 70%;
+        width: 70%;
+        height: auto;
         display: block;
       }
       .button{
+        top:8%; 
+        right:0%;
         width: 2.5%;
         height: 5%;
       }
     }
 
      #m{
-      position: absolute; 
+      position: fixed; 
       top:0; left:0; 
       width:100%; height: 100%;  
       display: none; background:url('') ;
@@ -90,7 +92,7 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
 
-    <div id="m" font-size="10px" >
+    <div id="m" font-size="10px">
       <button title="Close" onclick="myFunction()" class="button"  >x</button>
       <img id="mmm" src="">
     </div>
@@ -109,7 +111,7 @@
         document.getElementById("m").style.display = "none";
       }
       
-      function size(){
+      /* function size(){
         ;
         if(window.innerWidth<500){
           document.getElementById("mmm").style.with="100px";
@@ -117,7 +119,7 @@
         else{
           document.getElementById("mmm").style.with="200px";
         }
-      }
+      } */
       </script>
   </body>
 </html>
