@@ -94,7 +94,6 @@ class Chatbot extends Component {
 
     //communicate to chatbot
     handlemessage(para){ 
-      alert("old"+this.state.InputMessage);
       this.setState({InputMessage:''});
       var check=false;
       for(let i=0;i<para.length;i++){
@@ -165,11 +164,10 @@ class Chatbot extends Component {
     //Enter to send messages
     handleKeyPress = (event) => {
       if( event.key ==='Enter' && !event.shiftKey){
-        let oldmessage=this.state.InputMessage[0];
-        let newmessage=oldmessage.replace(/\n/g,"-");
-        this.setState({InputMessage:newmessage});
-        alert("new:"+this.state.InputMessage);
-        this.handlemessage(this.state.InputMessage);
+        let oldmessage=this.state.InputMessage;
+        let newmessage=oldmessage.replace(/\n/g,"");
+        //this.setState({InputMessage:newmessage});   
+        this.handlemessage(newmessage);
       }
     }
 
