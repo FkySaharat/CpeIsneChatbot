@@ -94,6 +94,7 @@ class Chatbot extends Component {
 
     //communicate to chatbot
     handlemessage(para){ 
+      
       this.setState({InputMessage:''});
       var check=false;
       for(let i=0;i<para.length;i++){
@@ -115,7 +116,9 @@ class Chatbot extends Component {
         else{
          
 
-          var room=["401","402"]
+          var room=["Scan 401","Scan 402","Scan 403","Scan 404","Scan 405","Scan 406","Scan 407","Scan 409","Scan 410","Scan 411","412","413","Scan 414","Scan 415","Scan 417","Scan 419","Scan 420",
+          "Scan 421","Scan 422","Scan 423","Scan 424","Scan 427","Scan 428","Scan 501","Scan 502","Scan 503","Scan 504",'Scan 505','Scan 506','Scan 507','Scan 508','Scan 509','Scan 510',
+          'Scan 511','Scan 512','Scan 513','Scan 514','Scan 514','Scan 516','Scan 517','Scan 518','Scan 519','Scan 520','Scan 521','Scan 522','Scan 523','Scan 524','Scan 525','Scan 526','Scan 527','528','Scan 529','Scan 530','Scan 533','Scan 535']
           let n=room.includes(para);
           if(n){
             attr=[{mode:'client',time:0,type:'linkmessage',payload:para}];
@@ -164,10 +167,11 @@ class Chatbot extends Component {
     //Enter to send messages
     handleKeyPress = (event) => {
       if( event.key ==='Enter' && !event.shiftKey){
-        let oldmessage=this.state.InputMessage;
-        let newmessage=oldmessage.replace(/\n/g,"");
-        //this.setState({InputMessage:newmessage});   
-        this.handlemessage(newmessage);
+        let oldmessage=this.state.InputMessage[0];
+        let newmessage=oldmessage.replace(/\n/g,"-");
+        this.setState({InputMessage:newmessage});
+        
+        this.handlemessage(this.state.InputMessage);
       }
     }
 
@@ -244,7 +248,7 @@ class Chatbot extends Component {
               </Box>
             </InputMessagesbox>  
             {this.state.showqr &&<div id="qr" style={{position:"fixed",left:"-125px",top:0,marginLeft:"50%",marginTop:"20%"}} >
-              <button style={{width:"15%",height:"35%",backgroundColor:"red",color:"white",cursor: "pointer",border:"none"}} onClick={this.handleqr}>x</button>
+            <button  style={{width:"15%",height:"35%",backgroundColor:"red",color:"white",cursor: "pointer",border:"none"}} onClick={this.handleqr}>x</button> 
             <QrReader
              delay={300}
              onError={this.handleError}
@@ -267,14 +271,16 @@ class Chatbot extends Component {
 
 
 class Linkmessage extends React.Component {
-
+  state={
+    value:this.props.value.replace("Scan"," ")
+  }
   render() {
     
     return (
       <div>
         <Typography style={{fontSize:"14px",color:"#605C4E",margin:"5px"}}>Please let us know what you want.</Typography>
-        <Button style={{marginRight:"5px"}} variant="outlined" size="small" color="primary" onClick = {() =>this.props.handler('Infomation '+this.props.value)}>Info{this.props.value}</Button>
-        <Button variant="outlined" size="small" color="primary" onClick = {() =>this.props.handler('I am at '+this.props.value)}>Go to Other room</Button>
+        <Button style={{marginRight:"5px"}} variant="outlined" size="small" color="primary" onClick = {() =>this.props.handler('Infomation '+this.state.value)}>Info{this.props.value}</Button>
+        <Button variant="outlined" size="small" color="primary" onClick = {() =>this.props.handler('I am at '+this.state.value)}>Go to Other room</Button>
 
       </div>
     );

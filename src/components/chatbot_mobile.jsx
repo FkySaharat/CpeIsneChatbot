@@ -3,8 +3,6 @@ import React, {Component } from "react";
 import Listmessages from './messages';
 import Api from '../api.json';
 
-
-
 import {Button,Grid, Box,InputBase, ButtonGroup,Typography} from "@material-ui/core";
 import { styled } from '@material-ui/core/styles';
 import QrReader from 'react-qr-reader';
@@ -125,7 +123,9 @@ class ChatbotMobile extends Component {
         }
         else{
           
-          var room=["401","402"]
+          var room=["401","402","403","404","405","406","407","409","410","411","412","413","414","415","417","419","420",
+          "421","422","423","424","427","428","501","502","503","504",'505','506','507','508','509','510',
+          '511','512','513','514','514','516','517','518','519','520','521','522','523','524','525','526','527','528','529','530','533','535']
           let n=room.includes(para);
           if(n){
             attr=[{mode:'client',time:0,type:'linkmessage',payload:para}];
@@ -232,6 +232,7 @@ class ChatbotMobile extends Component {
 
                 
             {this.state.showqr && <div style={{position:"fixed",top:0,backgroundColor:'#6E6A5E70',width:"100%",height:"100%"}}>
+            <button style={{position:"absolute", marginLeft:"10%",marginTop:"41%",width:"15%",height:"5%",backgroundColor:"red",color:"white",border:"none"}} onClick={this.handleqr}>x</button>
             <QrReader
              delay={300}
              onError={this.handleError}
