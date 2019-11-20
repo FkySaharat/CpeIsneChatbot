@@ -260,7 +260,6 @@ class Linkmessage extends React.Component {
 
       </div>
     );
-   
   }
 }
 export default ChatbotMobile;
