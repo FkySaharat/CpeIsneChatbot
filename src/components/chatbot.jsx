@@ -3,19 +3,16 @@ import React, {Component } from "react";
 import Listmessages from './messages';
 import Api from '../api.json';
 import bg from '../bgChatbot.png';
-
 import bgh from '../bgnew.png';
-
-
 import CropFreeIcon from '@material-ui/icons/CropFree';
 
 
 import {Button,Tooltip,Grid, Box,InputBase,ButtonGroup, Typography,TextField} from "@material-ui/core";
 import { styled } from '@material-ui/core/styles';
-
 import QrReader from 'react-qr-reader';
 
 import ScrollToBottom from 'react-scroll-to-bottom';
+
 ////speech to text
 import { css } from 'glamor';
 const ROOT_CSS = css({
@@ -23,6 +20,9 @@ const ROOT_CSS = css({
   width: 360,
   paddingLeft: '10px'
 });
+
+
+
 
 
 const InputMessagesbox = styled(Box)({ 
@@ -80,7 +80,7 @@ class Chatbot extends Component {
         this.handlemessage=this.handlemessage.bind(this);     
     }
 
-    
+   
     handleChange = event => {
       const {name, value} = event.currentTarget;
       this.setState({[name]: value});
@@ -116,7 +116,7 @@ class Chatbot extends Component {
         else{
          
 
-          var room=["401","402","403","404","405","406","407","409","410","411","412","413","414","415","501","502","503","504","505","508","509","510","514","515","516","517","518","519","520","521"]
+          var room=["401","402"]
           let n=room.includes(para);
           if(n){
             attr=[{mode:'client',time:0,type:'linkmessage',payload:para}];
@@ -169,12 +169,12 @@ class Chatbot extends Component {
         alert(newmessage);
         this.setState({InputMessage:newmessage});
         this.handlemessage(this.state.InputMessage);
-       
       }
       else  if( event.key ==='Enter' && event.shiftKey){
         var numberOfLineBreaks = (this.state.InputMessage.match(/\n/g)||[]).length;
         alert('Number of breaks: ' + numberOfLineBreaks);
         this.setState({InputMessage:this.state.InputMessage.replace(/\n/g," ")}); 
+
       }
 
     }
@@ -189,7 +189,7 @@ class Chatbot extends Component {
       }
     }
     
-    handleqr=()=> {
+    handleqr = data => {
       
       this.setState({showqr:!this.state.showqr});
     }
@@ -198,23 +198,19 @@ class Chatbot extends Component {
       console.error(err)
     }
 
-    
-    
-    
     render() {
-     
+      /* const Messages=this.state.InputMessage; */
+
       return (
         
-
         <Grid  container style={{position:"relative",height:'100vh',width:'100%',minWidth:"768px",backgroundImage:`url(${bgh})`,backgroundSize:"cover",backgroundPosition:"center center"}} direction="column"  alignItems="center">
 
-
-              <div style={{width:'376px',backgroundColor:'lightyellow  ', marginTop: '63px',}}> 
+              <div style={{width:'376px',backgroundColor:'lightyellow  ', marginTop: '63px'}}> 
 
               <ScrollToBottom item className={ ROOT_CSS } >
+    
+                  {this.state.messagebuffer.map(m=>{
                 
-                   {this.state.messagebuffer.map(m=>{
-
                       if(m.type!=='linkmessage'){
                         return <div><Listmessages value={m}  /></div>
                       }
@@ -226,11 +222,10 @@ class Chatbot extends Component {
                         else{
                           mes=m.payload;
                         }
-                        return <div ><Linkmessage value={mes} handler = {this.handlemessage}/></div>
-                      } 
-                    })} 
+                        return <div><Linkmessage value={mes} handler = {this.handlemessage}/></div>
+                      }
+                    })}
               </ScrollToBottom>
-              
               </div>
 
         
@@ -257,11 +252,13 @@ class Chatbot extends Component {
               </Box>
             </InputMessagesbox>  
             {this.state.showqr &&<div id="qr" style={{position:"fixed",left:"-125px",top:0,marginLeft:"50%",marginTop:"20%"}} >
-              <button onClick={this.handleqr}>x</button>
+              <button style={{width:"15%",height:"35%",backgroundColor:"red",color:"white",cursor: "pointer",border:"none"}} onClick={this.handleqr}>x</button>
             <QrReader
              delay={300}
              onError={this.handleError}
-             onScan={this.handleScan} 
+             onScan={this.handleScan}
+             
+            
             style={{ width: '250px' }}
             /></div>
 
@@ -294,6 +291,4 @@ class Linkmessage extends React.Component {
 }
 
 
-
 export default Chatbot;
-

@@ -163,7 +163,7 @@ class Messagemode extends Component {
             return(
             <div>
                 <Typography component="div"><Box textAlign="right" fontWeight="fontWeightLight" color="#9e9e9e">Me</Box></Typography>
-                <Box display="flex" justifyContent="flex-end"  >     
+                <Box display="flex" marginLeft="10%" justifyContent="flex-end"  >     
                         {image ? <Renderimage value={this.props.value.payload}/>:Rendermessage(this.props.value)}   
                 </Box>
                
@@ -173,7 +173,7 @@ class Messagemode extends Component {
             return(
             <div > 
                 <Typography component="div"><Box textAlign="left" fontWeight="fontWeightLight" color="#9e9e9e">Bot</Box></Typography>
-                <Box  display="flex" justifyContent="flex-start"  >                    
+                <Box  display="flex" width="75%" justifyContent="flex-start"  >                    
                         {image ? <Renderimage value={this.props.value.payload}/>:Rendermessage(this.props.value)}                  
                 </Box>
             </div>);

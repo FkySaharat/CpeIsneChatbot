@@ -184,7 +184,7 @@ class ChatbotMobile extends Component {
               <ScrollToBottom item className={ ROOT_CSS } >
     
                     {this.state.messagebuffer.map(m=>{
-                    
+                      
 
                         if(m.type!=='linkmessage'){
                           return <div><Listmessages value={m}  /></div>
@@ -260,6 +260,7 @@ class Linkmessage extends React.Component {
 
       </div>
     );
+   
   }
 }
 export default ChatbotMobile;
