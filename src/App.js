@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import {Chatbot,Navbar,Footer} from './components'; 
+import {Chatbot,Navbar,Footer,NavbarMobile,ChatbotMobile,FooterMobile} from './components'; 
 
 export default class extends Component{
   constructor(){
@@ -23,24 +23,25 @@ export default class extends Component{
   };
   
   render(){
-    const isMobile =this.state.width <= 500;
-    console.log(this.state.width);
-
-
-    //if(this.state.width>500){
-
+    //const isMobile =this.state.width <= 500;
+    if(this.state.width>500){
       return(
-        <Fragment >
-          <Navbar/>  
+        <Fragment>
+          <Navbar/>
           <Chatbot/>
           <Footer/>
         </Fragment>
       );
-    //}
-    //else{
 
-    //}
-
-
+    }
+    else{
+      return(
+      <Fragment>
+          <NavbarMobile/>
+          <ChatbotMobile/>
+          <FooterMobile/>
+        </Fragment>
+      );
+    }
   }
 }
