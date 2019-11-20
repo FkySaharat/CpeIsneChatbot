@@ -2,17 +2,16 @@
 import React, {Component } from "react";
 import Listmessages from './messages';
 import Api from '../api.json';
-//import bg from '../bgChatbot.png';
-import bgh from '../Halloween.jpg';
 
 
-import {Button,Grid, Box,InputBase, ButtonGroup} from "@material-ui/core";
+
+import {Button,Grid, Box,InputBase, ButtonGroup,Typography} from "@material-ui/core";
 import { styled } from '@material-ui/core/styles';
 import QrReader from 'react-qr-reader';
 
 import ScrollToBottom from 'react-scroll-to-bottom';
 
-////speech to text
+
 import { css } from 'glamor';
 
 const ROOT_CSS = css({
@@ -21,17 +20,10 @@ const ROOT_CSS = css({
   paddingLeft: '10px'
 });
 
-///////////////////
 
 
-const ShowMessagesbox = styled(Grid)({ 
-  background: '#eeeeee',
-  color: 'white',
-  height: '75vh',
-  width:'375px',
-  maxHeight:'500px',
-  padding: '15px 20px',
-});
+
+
 const InputMessagesbox = styled(Box)({ 
   minWidth:'360px',
   marginBottom:"20px",
@@ -191,17 +183,24 @@ class ChatbotMobile extends Component {
 
               <ScrollToBottom item className={ ROOT_CSS } >
     
-                  {this.state.messagebuffer.map(m=>{
-                    if(m!==this.state.messagebuffer[this.state.messagebuffer.length-1]){
+                    {this.state.messagebuffer.map(m=>{
+                      
 
-                        return <div><Listmessages value={m}  /></div>
-                      }
-                      else{
-                        console.log(m);
-                        return <div ><Listmessages value={m} /></div>
-                      }
-                    })}
-              </ScrollToBottom>
+                        if(m.type!=='linkmessage'){
+                          return <div><Listmessages value={m}  /></div>
+                        }
+                        else{
+                          var mes="";
+                          if(this.state.dataqr){
+                            mes=this.state.dataqr;
+                          }
+                          else{
+                            mes=m.payload;
+                          }
+                          return <div><Linkmessage value={mes} handler = {this.handlemessage}/></div>
+                        }
+                      })}
+                </ScrollToBottom>
               </div>
 
         
@@ -225,14 +224,15 @@ class ChatbotMobile extends Component {
                
               </Box>
             </InputMessagesbox>  
-
-            {this.state.showqr &&
+                  
+            {this.state.showqr && <div style={{position:"fixed",top:0,backgroundColor:'#6E6A5E70',width:"100%",height:"100%"}}>
             <QrReader
              delay={300}
              onError={this.handleError}
              onScan={this.handleScan}
-            style={{ width: '120px' }}
+            style={{ width: '80%',margin:"10%" ,marginTop:"50%"}}
             />
+            </div>
             }
            
             
@@ -244,5 +244,21 @@ class ChatbotMobile extends Component {
     }
 
 
+}
+
+class Linkmessage extends React.Component {
+
+  render() {
+    
+    return (
+      <div>
+        <Typography style={{fontSize:"14px",color:"#605C4E",margin:"5px"}}>Please let us know what you want.</Typography>
+        <Button style={{marginRight:"5px"}} variant="outlined" size="small" color="primary" onClick = {() =>this.props.handler('Infomation '+this.props.value)}>Info{this.props.value}</Button>
+        <Button variant="outlined" size="small" color="primary" onClick = {() =>this.props.handler('I am at '+this.props.value)}>Go to Other room</Button>
+
+      </div>
+    );
+   
+  }
 }
 export default ChatbotMobile;

@@ -2,14 +2,15 @@
 import React, {Component } from "react";
 import Listmessages from './messages';
 import Api from '../api.json';
-//import bg from '../bgChatbot.png';
-import bgh from '../bg_test.png';
+
+
 import CropFreeIcon from '@material-ui/icons/CropFree';
 
-import {Button,Grid, Box,InputBase,ButtonGroup} from "@material-ui/core";
-import { styled } from '@material-ui/core/styles';
-import QrReader from 'react-qr-reader';
 
+import {Button,Tooltip,Grid, Box,InputBase,ButtonGroup, Typography} from "@material-ui/core";
+import { styled } from '@material-ui/core/styles';
+
+import QrReader from 'react-qr-reader';
 import ScrollToBottom from 'react-scroll-to-bottom';
 
 ////speech to text
@@ -161,6 +162,7 @@ class Chatbot extends Component {
     handleKeyPress = (event) => {
       if( event.key ==='Enter' && !event.shiftKey){
         this.handlemessage(this.state.InputMessage);
+        
       }
 
     }
@@ -189,14 +191,14 @@ class Chatbot extends Component {
 
       return (
         
-        <Grid  container style={{position:"relative",height:'100vh',width:'100%',minWidth:"768px",backgroundImage:`url(${bgh})`,backgroundSize:"cover",backgroundPosition:"center center"}} direction="column"  alignItems="center">
+        <Grid  container style={{position:"relative",height:'100vh',width:'100%',minWidth:"768px"/*,backgroundImage:`url(${bgh})`*/,backgroundSize:"cover",backgroundPosition:"center center"}} direction="column"  alignItems="center">
 
               <div style={{width:'376px',backgroundColor:'lightyellow  ', marginTop: '63px',}}> 
 
               <ScrollToBottom item className={ ROOT_CSS } >
     
                   {this.state.messagebuffer.map(m=>{
-                    /* if(m!==this.state.messagebuffer[this.state.messagebuffer.length-1]){
+                     /*if(m!==this.state.messagebuffer[this.state.messagebuffer.length-1]){
 
                         return <div><Listmessages value={m}  /></div>
                       }
@@ -216,7 +218,7 @@ class Chatbot extends Component {
                         else{
                           mes=m.payload;
                         }
-                        return <div><Linkmessage value={mes} handler = {this.handlemessage}/></div>
+                        return <div ><Linkmessage value={mes} handler = {this.handlemessage}/></div>
                       }
                     })}
               </ScrollToBottom>
@@ -235,10 +237,12 @@ class Chatbot extends Component {
                 <Button variant="contained" color="primary"   onClick={()=>this.handlemessage(this.state.InputMessage)} style={{width:"50px",height:"100%",margin:"1px"}}>
                      send
                 </Button> 
-
-                <Button variant="contained" color="primary"   onClick={()=>this.handleqr()} style={{width:"50px",height:"100%",margin:"1px"}}>
+                <Tooltip title ="QR Code Scaner" placement="top">
+                <Button  variant="contained" color="primary"   onClick={()=>this.handleqr()} style={{width:"50px",height:"100%",margin:"1px"}}>
                   <CropFreeIcon/>
                 </Button>
+
+                </Tooltip>
                 </ButtonGroup>          
     
               </Box>
@@ -247,8 +251,7 @@ class Chatbot extends Component {
             <QrReader
              delay={300}
              onError={this.handleError}
-             onScan={this.handleScan}
-
+             onScan={this.handleScan} 
             style={{ width: '250px' }}
             /></div>
 
@@ -270,8 +273,8 @@ class Linkmessage extends React.Component {
     
     return (
       <div>
-
-  <Button variant="outlined" size="small" color="primary" onClick = {() =>this.props.handler('Infomation '+this.props.value)}>Info{this.props.value}</Button>
+        <Typography style={{fontSize:"14px",color:"#605C4E",margin:"5px"}}>Please let us know what you want.</Typography>
+        <Button style={{marginRight:"5px"}} variant="outlined" size="small" color="primary" onClick = {() =>this.props.handler('Infomation '+this.props.value)}>Info{this.props.value}</Button>
         <Button variant="outlined" size="small" color="primary" onClick = {() =>this.props.handler('I am at '+this.props.value)}>Go to Other room</Button>
 
       </div>
@@ -279,5 +282,6 @@ class Linkmessage extends React.Component {
    
   }
 }
+
 
 export default Chatbot;
